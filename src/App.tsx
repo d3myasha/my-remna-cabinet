@@ -26,6 +26,7 @@ import OAuthCallback from './pages/OAuthCallback';
 import Dashboard from './pages/Dashboard';
 
 // User pages - lazy load
+const Subscriptions = lazy(() => import('./pages/Subscriptions'));
 const Subscription = lazy(() => import('./pages/Subscription'));
 const SubscriptionPurchase = lazy(() => import('./pages/SubscriptionPurchase'));
 const Balance = lazy(() => import('./pages/Balance'));
@@ -248,6 +249,26 @@ function App() {
             <ProtectedRoute>
               <LazyPage>
                 <Dashboard />
+              </LazyPage>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/subscriptions"
+          element={
+            <ProtectedRoute>
+              <LazyPage>
+                <Subscriptions />
+              </LazyPage>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/subscription/:subscriptionId"
+          element={
+            <ProtectedRoute>
+              <LazyPage>
+                <Subscription />
               </LazyPage>
             </ProtectedRoute>
           }

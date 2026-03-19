@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 import { AxiosError } from 'axios';
 import { subscriptionApi } from '../api/subscription';
 import { promoApi } from '../api/promo';
@@ -28,6 +28,10 @@ export default function SubscriptionPurchase() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const subscriptionId = searchParams.get('subscriptionId')
+    ? parseInt(searchParams.get('subscriptionId')!, 10)
+    : undefined;
   const { formatAmount, currencySymbol } = useCurrency();
   const { isDark } = useTheme();
   const g = getGlassColors(isDark);
@@ -37,7 +41,7 @@ export default function SubscriptionPurchase() {
   // Subscription query (shares cache with /subscription page)
   const { data: subscriptionResponse, isLoading } = useQuery({
     queryKey: ['subscription'],
-    queryFn: subscriptionApi.getSubscription,
+    queryFn: () => subscriptionApi.getSubscription(subscriptionId),
     retry: false,
     staleTime: 0,
     refetchOnMount: 'always',
@@ -47,7 +51,7 @@ export default function SubscriptionPurchase() {
   // Purchase options
   const { data: purchaseOptions, isLoading: optionsLoading } = useQuery({
     queryKey: ['purchase-options'],
-    queryFn: subscriptionApi.getPurchaseOptions,
+    queryFn: () => subscriptionApi.getPurchaseOptions(subscriptionId),
     staleTime: 0,
     refetchOnMount: 'always',
   });
@@ -212,13 +216,13 @@ export default function SubscriptionPurchase() {
   // Preview query (classic)
   const { data: preview, isLoading: previewLoading } = useQuery({
     queryKey: ['purchase-preview', currentSelection],
-    queryFn: () => subscriptionApi.previewPurchase(currentSelection),
+    queryFn: () => subscriptionApi.previewPurchase(currentSelection, subscriptionId),
     enabled: !!selectedPeriod && showPurchaseForm && currentStep === 'confirm',
   });
 
   // Classic purchase mutation
   const purchaseMutation = useMutation({
-    mutationFn: () => subscriptionApi.submitPurchase(currentSelection),
+    mutationFn: () => subscriptionApi.submitPurchase(currentSelection, subscriptionId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['subscription'] });
       queryClient.invalidateQueries({ queryKey: ['purchase-options'] });
@@ -229,13 +233,13 @@ export default function SubscriptionPurchase() {
   // Switch preview query
   const { data: switchPreview, isLoading: switchPreviewLoading } = useQuery({
     queryKey: ['tariff-switch-preview', switchTariffId],
-    queryFn: () => subscriptionApi.previewTariffSwitch(switchTariffId!),
+    queryFn: () => subscriptionApi.previewTariffSwitch(switchTariffId!, subscriptionId),
     enabled: !!switchTariffId,
   });
 
   // Tariff switch mutation
   const switchTariffMutation = useMutation({
-    mutationFn: (tariffId: number) => subscriptionApi.switchTariff(tariffId),
+    mutationFn: (tariffId: number) => subscriptionApi.switchTariff(tariffId, subscriptionId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['subscription'] });
       queryClient.invalidateQueries({ queryKey: ['purchase-options'] });
