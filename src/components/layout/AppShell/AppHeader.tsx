@@ -2,7 +2,6 @@ import { Link, useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
-import { initDataUser } from '@telegram-apps/sdk-react';
 
 import { useAuthStore } from '@/store/auth';
 import { useShallow } from 'zustand/shallow';
@@ -86,7 +85,7 @@ export function AppHeader({
   );
   const { toggleTheme, isDark } = useTheme();
   const { haptic, platform } = usePlatform();
-  const [userPhotoUrl, setUserPhotoUrl] = useState<string | null>(null);
+  const userPhotoUrl = user?.photo_url || null;
   const [logoLoaded, setLogoLoaded] = useState(() => isLogoPreloaded());
 
   // Branding
@@ -117,18 +116,6 @@ export function AppHeader({
     staleTime: 1000 * 60 * 5,
   });
   const canToggle = enabledThemes?.dark && enabledThemes?.light;
-
-  // Get user photo from Telegram
-  useEffect(() => {
-    try {
-      const user = initDataUser();
-      if (user?.photo_url) {
-        setUserPhotoUrl(user.photo_url);
-      }
-    } catch {
-      // Not in Telegram or init data not available
-    }
-  }, []);
 
   // Lock scroll when menu is open (works in iframe/Telegram Mini App)
   useEffect(() => {

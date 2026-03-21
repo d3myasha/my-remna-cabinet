@@ -1,36 +1,33 @@
 # Bedolaga Cabinet - Web Interface
 
-Веб-интерфейс личного кабинета для VPN бота на базе [Remnawave Bedolaga Telegram Bot V3.0.0+](https://github.com/BEDOLAGA-DEV/remnawave-bedolaga-telegram-bot).
+Веб-интерфейс личного кабинета, который может работать автономно как standalone web-приложение с API панели RemnaWave.
 
-React + Vite + TypeScript | Авторизация через Telegram | Мультиязычность (EN/RU) | Адаптивный дизайн
+React + Vite + TypeScript | Standalone/Web режим | Мультиязычность (EN/RU) | Адаптивный дизайн
 
 ## Требования
 
 - Docker и Docker Compose
-- Запущенный backend бота с включенным Cabinet API
+- Доступный API backend (панель RemnaWave или совместимый Cabinet API)
 - Обратный прокси (Caddy / Nginx / Traefik)
 
 ## Архитектура
 
 ```
-Браузер  →  Caddy/Nginx  →  /api/*     →  remnawave_bot:8080  (backend API)
+Браузер  →  Caddy/Nginx  →  /api/*     →  remnawave_panel:3000 (backend API)
                          →  /*          →  /srv/cabinet         (статика frontend)
 ```
 
 Frontend — это статические файлы (HTML, JS, CSS). Обратный прокси выполняет две задачи:
 1. Раздает статику frontend
-2. Проксирует `/api/*` запросы на backend бота (с удалением префикса `/api`)
+2. Проксирует `/api/*` запросы на backend API (с удалением префикса `/api`)
 
 ## Установка
 
-### Шаг 1. Настройка backend бота
+### Шаг 1. Настройка backend API
 
-В `.env` файле бота добавьте:
+На стороне вашего backend/panel сервиса проверьте:
 
 ```env
-# Включить Cabinet API
-CABINET_ENABLED=true
-
 # JWT секрет (сгенерируйте случайную строку: openssl rand -hex 32)
 CABINET_JWT_SECRET=your_random_secret_key_here
 
@@ -38,7 +35,7 @@ CABINET_JWT_SECRET=your_random_secret_key_here
 CABINET_ALLOWED_ORIGINS=https://cabinet.example.com
 ```
 
-Перезапустите бота после изменений.
+Перезапустите backend после изменений.
 
 ### Шаг 2. Получение frontend файлов
 
@@ -69,7 +66,6 @@ cp .env.example .env
 
 ```env
 VITE_API_URL=/api
-VITE_TELEGRAM_BOT_USERNAME=your_bot_username
 VITE_APP_NAME=My VPN
 VITE_APP_LOGO=V
 ```
@@ -105,10 +101,10 @@ Caddy автоматически получает и обновляет SSL се
 https://cabinet.example.com {
     encode gzip zstd
 
-    # API запросы → backend бота (удаляет /api префикс)
+    # API запросы → backend API (удаляет /api префикс)
     handle /api/* {
         uri strip_prefix /api
-        reverse_proxy remnawave_bot:8080
+        reverse_proxy remnawave_panel:3000
     }
 
     # Frontend статика
@@ -128,7 +124,7 @@ https://cabinet.example.com {
 }
 ```
 
-> **Примечание:** `remnawave_bot:8080` — имя контейнера бота в Docker сети.
+> **Примечание:** `remnawave_panel:3000` — пример имени контейнера backend/panel в Docker сети.
 > Если Caddy запущен на хосте, а не в Docker, используйте `localhost:8080` или IP сервера.
 
 #### Nginx
@@ -147,10 +143,10 @@ server {
     gzip on;
     gzip_types text/plain text/css application/json application/javascript text/xml image/svg+xml;
 
-    # API запросы → backend бота
+    # API запросы → backend API
     location /api/ {
         rewrite ^/api/(.*) /$1 break;
-        proxy_pass http://remnawave_bot:8080;
+        proxy_pass http://remnawave_panel:3000;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -204,7 +200,7 @@ services:
 networks:
   bot_network:
     external: true
-    name: remnawave-bedolaga-telegram-bot_bot_network  # Сеть вашего бота
+    name: remnawave-panel-network  # Сеть вашего backend/panel
 ```
 
 ### Caddyfile
@@ -213,10 +209,10 @@ networks:
 https://cabinet.example.com {
     encode gzip zstd
 
-    # API запросы → backend бота
+    # API запросы → backend API
     handle /api/* {
         uri strip_prefix /api
-        reverse_proxy remnawave_bot:8080
+        reverse_proxy remnawave_panel:3000
     }
 
     # Frontend → nginx контейнер (порт 80 внутри Docker сети)
@@ -245,11 +241,10 @@ https://cabinet.example.com {
 |---|---|---|
 | `CABINET_PORT` | Порт контейнера на хосте | `3020` |
 
-### Backend бота (.env бота)
+### Backend API (пример переменных)
 
 | Переменная | Описание | По умолчанию |
 |---|---|---|
-| `CABINET_ENABLED` | Включить Cabinet API | `false` |
 | `CABINET_JWT_SECRET` | Секретный ключ для JWT | `BOT_TOKEN` |
 | `CABINET_ALLOWED_ORIGINS` | CORS origins (через запятую) | — |
 | `CABINET_ACCESS_TOKEN_EXPIRE_MINUTES` | Время жизни access token | `15` |
@@ -259,7 +254,7 @@ https://cabinet.example.com {
 
 ### CORS ошибка в консоли браузера
 
-Домен кабинета не добавлен в `CABINET_ALLOWED_ORIGINS` в `.env` бота. Добавьте и перезапустите бота.
+Домен кабинета не добавлен в `CABINET_ALLOWED_ORIGINS` вашего backend API. Добавьте и перезапустите backend.
 
 ### API возвращает HTML вместо JSON
 
@@ -267,7 +262,7 @@ https://cabinet.example.com {
 
 ### 502 Bad Gateway
 
-1. Backend бота не запущен — проверьте `docker ps`
+1. Backend API не запущен — проверьте `docker ps`
 2. Контейнеры в разных Docker сетях — проверьте и подключите:
    ```bash
    # Проверить сети контейнера
@@ -278,13 +273,8 @@ https://cabinet.example.com {
    ```
 3. Неправильное имя сервиса в прокси — проверьте через:
    ```bash
-   docker exec <caddy_container> wget -qO- http://remnawave_bot:8080/health
+   docker exec <caddy_container> wget -qO- http://remnawave_panel:3000/health
    ```
-
-### Telegram авторизация не работает
-
-1. `VITE_TELEGRAM_BOT_USERNAME` должен быть без `@`
-2. Домен кабинета добавлен в BotFather → Bot Settings → Domain
 
 ### Белый экран / SPA не работает
 
@@ -325,7 +315,7 @@ bedolaga-cabinet/
 
 ## Связанные проекты
 
-- [Remnawave Bedolaga Telegram Bot](https://github.com/BEDOLAGA-DEV/remnawave-bedolaga-telegram-bot) — Backend бота
+- [RemnaWave](https://remna.st) — Панель/бэкенд, к которому подключается кабинет
 - [Bedolaga Chat](https://t.me/+wTdMtSWq8YdmZmVi) — Чат поддержки
 
 ## Контакты

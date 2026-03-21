@@ -129,16 +129,13 @@ export default function OAuthCallback() {
     handle();
   }, [searchParams, loginWithOAuth, navigate, isAuthenticated, t]);
 
-  // Server-complete result: show success with "Return to Telegram" link
+  // Server-complete result: show success action back to cabinet
   // (merge redirect is handled by the useEffect above)
   if (
     serverLinkResult &&
     serverLinkResult.success &&
     !(serverLinkResult.merge_required && serverLinkResult.merge_token)
   ) {
-    const botUsername = import.meta.env.VITE_TELEGRAM_BOT_USERNAME || '';
-    const telegramLink = botUsername ? `https://t.me/${botUsername}` : '';
-
     return (
       <div className="flex min-h-screen items-center justify-center px-4 py-8">
         <div className="fixed inset-0 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950" />
@@ -158,15 +155,15 @@ export default function OAuthCallback() {
             <h2 className="mb-2 text-lg font-semibold text-dark-50">
               {t('profile.accounts.linkSuccess')}
             </h2>
-            <p className="mb-6 text-sm text-dark-400">{t('profile.accounts.returnToTelegram')}</p>
-            {telegramLink && (
-              <a
-                href={telegramLink}
-                className="btn-primary inline-block w-full rounded-lg bg-accent-500 px-6 py-3 text-center font-medium text-dark-950 no-underline transition-colors hover:bg-accent-400"
-              >
-                {t('profile.accounts.openTelegram')}
-              </a>
-            )}
+            <p className="mb-6 text-sm text-dark-400">
+              {t('profile.accounts.backToAccounts', 'Back to accounts')}
+            </p>
+            <button
+              onClick={() => navigate('/profile/accounts', { replace: true })}
+              className="btn-primary w-full"
+            >
+              {t('profile.accounts.backToAccounts', 'Back to accounts')}
+            </button>
           </div>
         </div>
       </div>
@@ -174,20 +171,9 @@ export default function OAuthCallback() {
   }
 
   if (error) {
-    const isServerMode = errorMode === 'link-server';
     const isLinkBrowserMode = errorMode === 'link-browser';
-    const botUsername = import.meta.env.VITE_TELEGRAM_BOT_USERNAME || '';
-    const telegramLink = botUsername ? `https://t.me/${botUsername}` : '';
 
-    const errorAction =
-      isServerMode && telegramLink ? (
-        <a
-          href={telegramLink}
-          className="btn-primary inline-block w-full rounded-lg bg-accent-500 px-6 py-3 text-center font-medium text-dark-950 no-underline transition-colors hover:bg-accent-400"
-        >
-          {t('profile.accounts.openTelegram')}
-        </a>
-      ) : isLinkBrowserMode ? (
+    const errorAction = isLinkBrowserMode ? (
         <button
           onClick={() => navigate('/profile/accounts', { replace: true })}
           className="btn-primary w-full"

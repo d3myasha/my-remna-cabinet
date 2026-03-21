@@ -20,6 +20,7 @@ import { copyToClipboard } from '../utils/clipboard';
 import { getApiErrorMessage } from '../utils/api-error';
 import { formatPrice } from '../utils/format';
 import { usePlatform, useHaptic } from '@/platform';
+import { isTelegramPaymentMethod } from '@/config/webFeatures';
 
 function GiftIcon({ className }: { className?: string }) {
   return (
@@ -515,6 +516,10 @@ function BuyTabContent({
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
   const [selectedSubOption, setSelectedSubOption] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const availablePaymentMethods = useMemo(
+    () => config.payment_methods.filter((m) => !isTelegramPaymentMethod(m.method_id)),
+    [config.payment_methods],
+  );
 
   // Collect ALL unique periods across ALL tariffs
   const allPeriods = useMemo(() => {
@@ -547,8 +552,8 @@ function BuyTabContent({
       setSelectedTariffId(visibleTariffs[0].id);
     }
 
-    if (config.payment_methods.length > 0 && selectedMethod === null) {
-      const firstMethod = config.payment_methods[0];
+    if (availablePaymentMethods.length > 0 && selectedMethod === null) {
+      const firstMethod = availablePaymentMethods[0];
       setSelectedMethod(firstMethod.method_id);
       if (firstMethod.sub_options && firstMethod.sub_options.length >= 1) {
         setSelectedSubOption(firstMethod.sub_options[0].id);
@@ -556,7 +561,15 @@ function BuyTabContent({
         setSelectedSubOption(null);
       }
     }
-  }, [config, allPeriods, visibleTariffs, selectedTariffId, selectedPeriodDays, selectedMethod]);
+  }, [
+    config,
+    allPeriods,
+    visibleTariffs,
+    selectedTariffId,
+    selectedPeriodDays,
+    selectedMethod,
+    availablePaymentMethods,
+  ]);
 
   // When period changes, auto-select first visible tariff if current is hidden
   useEffect(() => {
@@ -781,7 +794,7 @@ function BuyTabContent({
 
       {/* Payment method cards (gateway mode only) */}
       <AnimatePresence mode="wait">
-        {paymentMode === 'gateway' && config.payment_methods.length > 0 && (
+        {paymentMode === 'gateway' && availablePaymentMethods.length > 0 && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
@@ -790,7 +803,7 @@ function BuyTabContent({
             className="overflow-hidden"
           >
             <div role="radiogroup" aria-label={t('gift.paymentMethod')} className="space-y-2">
-              {config.payment_methods.map((method) => (
+              {availablePaymentMethods.map((method) => (
                 <PaymentMethodCard
                   key={method.method_id}
                   method={method}

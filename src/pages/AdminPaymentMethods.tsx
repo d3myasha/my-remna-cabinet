@@ -23,6 +23,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { adminPaymentMethodsApi } from '../api/adminPaymentMethods';
 import type { PaymentMethodConfig } from '../types';
+import { isTelegramPaymentMethod } from '@/config/webFeatures';
 const BackIcon = () => (
   <svg
     className="h-5 w-5 text-dark-400"
@@ -83,8 +84,6 @@ function SortablePaymentCard({ config, onClick }: SortableCardProps) {
 
   // Build condition summary chips
   const chips: string[] = [];
-  if (config.user_type_filter === 'telegram')
-    chips.push(t('admin.paymentMethods.userTypeTelegram'));
   if (config.user_type_filter === 'email') chips.push(t('admin.paymentMethods.userTypeEmail'));
   if (config.first_topup_filter === 'yes') chips.push(t('admin.paymentMethods.firstTopupYes'));
   if (config.first_topup_filter === 'no') chips.push(t('admin.paymentMethods.firstTopupNo'));
@@ -199,7 +198,7 @@ export default function AdminPaymentMethods() {
   // Sync fetched data to local state
   useEffect(() => {
     if (fetchedMethods && !orderChanged) {
-      setMethods(fetchedMethods);
+      setMethods(fetchedMethods.filter((m) => !isTelegramPaymentMethod(m.method_id)));
     }
   }, [fetchedMethods, orderChanged]);
 

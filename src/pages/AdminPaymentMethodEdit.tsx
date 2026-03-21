@@ -7,6 +7,7 @@ import { METHOD_LABELS } from '../constants/paymentMethods';
 import type { PromoGroupSimple } from '../types';
 import { usePlatform } from '../platform/hooks/usePlatform';
 import { createNumberInputHandler, toNumber } from '../utils/inputHelpers';
+import { isTelegramPaymentMethod } from '@/config/webFeatures';
 const BackIcon = () => (
   <svg
     className="h-5 w-5 text-dark-400"
@@ -75,12 +76,18 @@ export default function AdminPaymentMethodEdit() {
       setSubOptions(config.sub_options || {});
       setMinAmount(config.min_amount_kopeks ?? '');
       setMaxAmount(config.max_amount_kopeks ?? '');
-      setUserTypeFilter(config.user_type_filter);
+      setUserTypeFilter(config.user_type_filter === 'telegram' ? 'all' : config.user_type_filter);
       setFirstTopupFilter(config.first_topup_filter);
       setPromoGroupFilterMode(config.promo_group_filter_mode);
       setSelectedPromoGroupIds(config.allowed_promo_group_ids);
     }
   }, [config]);
+
+  useEffect(() => {
+    if (config && isTelegramPaymentMethod(config.method_id)) {
+      navigate('/admin/payment-methods', { replace: true });
+    }
+  }, [config, navigate]);
 
   // Update method mutation
   const updateMethodMutation = useMutation({
@@ -306,7 +313,7 @@ export default function AdminPaymentMethodEdit() {
               {t('admin.paymentMethods.userTypeFilter')}
             </label>
             <div className="flex gap-2">
-              {(['all', 'telegram', 'email'] as const).map((val) => (
+              {(['all', 'email'] as const).map((val) => (
                 <button
                   key={val}
                   onClick={() => setUserTypeFilter(val)}
@@ -318,9 +325,7 @@ export default function AdminPaymentMethodEdit() {
                 >
                   {val === 'all'
                     ? t('admin.paymentMethods.userTypeAll')
-                    : val === 'telegram'
-                      ? 'Telegram'
-                      : 'Email'}
+                    : 'Email'}
                 </button>
               ))}
             </div>

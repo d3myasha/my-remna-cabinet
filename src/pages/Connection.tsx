@@ -2,9 +2,7 @@ import { useEffect, useCallback, useMemo, useRef } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
-import { openLink as sdkOpenLink } from '@telegram-apps/sdk-react';
 import { subscriptionApi } from '../api/subscription';
-import { useTelegramSDK } from '../hooks/useTelegramSDK';
 import { useHaptic } from '@/platform';
 import { resolveTemplate, hasTemplates } from '../utils/templateEngine';
 import { useAuthStore } from '../store/auth';
@@ -16,7 +14,6 @@ export default function Connection() {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
   const isAdmin = useAuthStore((state) => state.isAdmin);
-  const { isTelegramWebApp } = useTelegramSDK();
   const { impact: hapticImpact } = useHaptic();
 
   const hapticRef = useRef(hapticImpact);
@@ -37,13 +34,13 @@ export default function Connection() {
 
   const handleOpenQR = useCallback(() => {
     navigate('/connection/qr', {
-      replace: !isTelegramWebApp,
+      replace: true,
       state: {
         url: appConfig?.subscriptionUrl,
         hideLink: appConfig?.hideLink ?? false,
       },
     });
-  }, [navigate, appConfig?.subscriptionUrl, appConfig?.hideLink, isTelegramWebApp]);
+  }, [navigate, appConfig?.subscriptionUrl, appConfig?.hideLink]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -76,18 +73,9 @@ export default function Connection() {
 
       const finalUrl = `${window.location.origin}/miniapp/redirect.html?url=${encodeURIComponent(resolved)}&lang=${i18n.language || 'en'}`;
 
-      if (isTelegramWebApp) {
-        try {
-          sdkOpenLink(finalUrl, { tryInstantView: false });
-          return;
-        } catch {
-          // SDK not available, fallback
-        }
-      }
-
       window.location.href = finalUrl;
     },
-    [isTelegramWebApp, i18n.language, resolveUrl],
+    [i18n.language, resolveUrl],
   );
 
   // Check if any platform has configured apps
@@ -178,7 +166,7 @@ export default function Connection() {
     <InstallationGuide
       appConfig={appConfig}
       onOpenDeepLink={openDeepLink}
-      isTelegramWebApp={isTelegramWebApp}
+      isTelegramWebApp={false}
       onGoBack={handleGoBack}
       onOpenQR={handleOpenQR}
     />

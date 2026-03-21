@@ -16,13 +16,11 @@ import {
   type EmailAuthEnabled,
 } from '../api/branding';
 import { getAndClearReturnUrl } from '../utils/token';
-import { isInTelegramWebApp, getTelegramInitData, useTelegramSDK } from '../hooks/useTelegramSDK';
-import { closeMiniApp } from '@telegram-apps/sdk-react';
+import { useTelegramSDK } from '../hooks/useTelegramSDK';
 import LanguageSwitcher from '../components/LanguageSwitcher';
-import TelegramLoginButton from '../components/TelegramLoginButton';
 import OAuthProviderIcon from '../components/OAuthProviderIcon';
 import { saveOAuthState } from '../utils/oauth';
-import { consumeReferralCode, getPendingReferralCode } from '../utils/referral';
+import { getPendingReferralCode } from '../utils/referral';
 
 export default function Login() {
   const { t } = useTranslation();
@@ -30,15 +28,11 @@ export default function Login() {
   const location = useLocation();
   const {
     isAuthenticated,
-    isLoading: isAuthInitializing,
-    loginWithTelegram,
     loginWithEmail,
     registerWithEmail,
   } = useAuthStore(
     useShallow((state) => ({
       isAuthenticated: state.isAuthenticated,
-      isLoading: state.isLoading,
-      loginWithTelegram: state.loginWithTelegram,
       loginWithEmail: state.loginWithEmail,
       registerWithEmail: state.registerWithEmail,
     })),
@@ -56,7 +50,6 @@ export default function Login() {
   const [firstName, setFirstName] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isTelegramWebApp, setIsTelegramWebApp] = useState(false);
   const [logoLoaded, setLogoLoaded] = useState(() => isLogoPreloaded());
   const [registeredEmail, setRegisteredEmail] = useState<string | null>(null);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
@@ -146,16 +139,6 @@ export default function Login() {
     }
   };
 
-  const botUsername = import.meta.env.VITE_TELEGRAM_BOT_USERNAME || '';
-
-  // If email auth is disabled but user came with ref param, redirect to bot
-  useEffect(() => {
-    if (referralCode && emailAuthConfig?.enabled === false && botUsername) {
-      consumeReferralCode();
-      window.location.href = `https://t.me/${botUsername}?start=${encodeURIComponent(referralCode)}`;
-    }
-  }, [referralCode, emailAuthConfig, botUsername]);
-
   const appName = branding ? branding.name : import.meta.env.VITE_APP_NAME || 'VPN';
   const appLogo = branding?.logo_letter || import.meta.env.VITE_APP_LOGO || 'V';
   const logoUrl = branding ? brandingApi.getLogoUrl(branding) : null;
@@ -170,59 +153,6 @@ export default function Login() {
       navigate(getReturnUrl(), { replace: true });
     }
   }, [isAuthenticated, navigate, getReturnUrl]);
-
-  // Try Telegram WebApp authentication on mount (with auto-retry on 401)
-  // Wait for auth store initialization to complete to avoid race conditions
-  // with stale tokens triggering interceptor refresh/redirect loops
-  useEffect(() => {
-    // Don't attempt Telegram auth until store initialization is done
-    if (isAuthInitializing) return;
-
-    const tryTelegramAuth = async () => {
-      const initData = getTelegramInitData();
-      if (!isInTelegramWebApp() || !initData) return;
-
-      setIsTelegramWebApp(true);
-      setIsLoading(true);
-
-      const MAX_RETRIES = 1;
-      for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
-        try {
-          await loginWithTelegram(initData);
-          navigate(getReturnUrl(), { replace: true });
-          return;
-        } catch (err) {
-          const error = err as { response?: { status?: number; data?: { detail?: string } } };
-          const status = error.response?.status;
-          const detail = error.response?.data?.detail;
-          if (import.meta.env.DEV)
-            console.warn(`Telegram auth attempt ${attempt + 1} failed:`, status, detail);
-
-          if (status === 401 && attempt < MAX_RETRIES) {
-            await new Promise((r) => setTimeout(r, 1500));
-            continue;
-          }
-
-          // Show backend error detail if available, otherwise generic message
-          setError(detail || t('auth.telegramRequired'));
-        }
-      }
-
-      setIsLoading(false);
-    };
-
-    tryTelegramAuth();
-  }, [isAuthInitializing, loginWithTelegram, navigate, t, getReturnUrl]);
-
-  const handleRetryTelegramAuth = () => {
-    try {
-      sessionStorage.removeItem('tapps/launchParams');
-      sessionStorage.removeItem('telegram_init_data');
-      closeMiniApp();
-    } catch {
-      window.location.reload();
-    }
-  };
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -433,54 +363,9 @@ export default function Login() {
               </div>
             )}
 
-            {/* Telegram auth section */}
-            <div className="space-y-3">
-              {isLoading && isTelegramWebApp ? (
-                <div className="py-6 text-center">
-                  <div className="mx-auto mb-3 h-8 w-8 animate-spin rounded-full border-2 border-accent-500 border-t-transparent" />
-                  <p className="text-sm text-dark-400">{t('auth.authenticating')}</p>
-                </div>
-              ) : isTelegramWebApp && error ? (
-                <div className="space-y-3 text-center">
-                  <button
-                    onClick={handleRetryTelegramAuth}
-                    className="btn-primary mx-auto flex items-center gap-2 px-5 py-2.5"
-                  >
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                      />
-                    </svg>
-                    {t('auth.tryAgain')}
-                  </button>
-                  <p className="text-xs text-dark-500">
-                    {t(
-                      'auth.telegramReopenHint',
-                      'If the problem persists, close and reopen the app',
-                    )}
-                  </p>
-                </div>
-              ) : (
-                <TelegramLoginButton referralCode={referralCode || undefined} />
-              )}
-            </div>
-
             {/* OAuth providers - compact icon row */}
             {oauthProviders.length > 0 && (
               <>
-                <div className="my-4 flex items-center gap-3">
-                  <div className="h-px flex-1 bg-dark-700" />
-                  <span className="text-xs text-dark-500">{t('auth.or', 'or')}</span>
-                  <div className="h-px flex-1 bg-dark-700" />
-                </div>
                 <div className="flex items-stretch gap-2">
                   {oauthProviders.map((provider) => (
                     <button

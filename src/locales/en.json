@@ -161,28 +161,20 @@
     "firstNamePlaceholder": "Your name (optional)",
     "forgotPassword": "Forgot password?",
     "resetPassword": "Reset password",
-    "loginWithTelegram": "Login with Telegram",
     "loginWithEmail": "Login with Email",
     "noAccount": "Don't have an account?",
     "hasAccount": "Already have an account?",
     "or": "or",
-    "registerHint": "To register with email, first log in via Telegram, then link your email in settings.",
-    "telegramRequired": "Telegram authorization required",
-    "telegramRetryFailed": "Authorization failed. Close the app and try again.",
-    "telegramReopenHint": "If the problem persists, close and reopen the app",
-    "telegramNotConfigured": "Telegram bot is not configured",
-    "telegramUnavailable": "Telegram login is temporarily unavailable",
+    "registerHint": "Use your email to register and sign in.",
     "authenticating": "Authenticating...",
     "orOpenInApp": "Or open the bot in the app",
     "loginFailed": "Login Failed",
-    "telegramWidgetBlocked": "Telegram login widget is unavailable. Use the bot to sign in:",
-    "openBotToLogin": "Open bot to sign in",
     "waitingForConfirmation": "Waiting for confirmation...",
     "deepLinkExpired": "Link expired. Please try again.",
     "tryAgain": "Try Again",
     "welcomeBack": "Welcome back!",
     "loginTitle": "Login to Cabinet",
-    "loginSubtitle": "Sign in with Telegram or use your email",
+    "loginSubtitle": "Sign in with email",
     "referralInvite": "You've been invited via referral link!",
     "passwordMismatch": "Passwords do not match",
     "passwordTooShort": "Password must be at least 8 characters",
@@ -604,7 +596,7 @@
         "description": "Pay with cryptocurrency via CryptoBot"
       },
       "telegram_stars": {
-        "description": "Pay with Telegram Stars"
+        "description": "Pay with Web Stars"
       },
       "heleket": {
         "description": "Pay with cryptocurrency via Heleket"
@@ -659,7 +651,7 @@
     "minAmount": "Min.",
     "maxAmount": "Max.",
     "notAvailable": "Not available",
-    "useBot": "Please use the Telegram bot to top up your balance.",
+    "useBot": "Please use the Web bot to top up your balance.",
     "page": "Page {{current}} of {{total}}",
     "invalidAmount": "Invalid amount",
     "promocode": {
@@ -712,7 +704,7 @@
     "openPaymentPage": "Open payment page",
     "errors": {
       "noPaymentLink": "Server did not return a payment link",
-      "starsOnlyInTelegram": "Stars payment is only available in Telegram Mini App",
+      "starsOnlyInTelegram": "Stars payment is only available in web app",
       "generic": "Error: {{details}}",
       "invoiceFailed": "Failed to create invoice",
       "rateLimit": "Please wait {{seconds}} sec.",
@@ -838,7 +830,7 @@
       "fields": {
         "companyName": "Company Name",
         "companyNamePlaceholder": "Your company or brand name",
-        "telegramChannel": "Telegram Channel",
+        "telegramChannel": "Web Channel",
         "telegramChannelPlaceholder": "@yourchannel",
         "websiteUrl": "Website URL",
         "websiteUrlPlaceholder": "https://example.com",
@@ -931,7 +923,7 @@
     "spinsRemaining": "Spins remaining today",
     "choosePayment": "Choose payment method",
     "stars": "Stars",
-    "telegramStars": "Telegram Stars",
+    "telegramStars": "Web Stars",
     "days": "days",
     "days_one": "{{count}} day",
     "days_other": "{{count}} days",
@@ -954,18 +946,18 @@
       "cannotSpin": "Cannot spin right now",
       "insufficientBalance": "Insufficient balance",
       "topUpRequired": "Top up your balance to pay for spin",
-      "starsNotAvailable": "Stars payment not available. Open the app via Telegram.",
+      "starsNotAvailable": "Stars payment not available. Open the app via Web.",
       "noSubscription": "An active subscription is required to spin the wheel. Activate your subscription first."
     },
     "payWithStars": "Pay with Stars",
     "payWithDays": "Pay with days",
     "processingPayment": "Processing...",
-    "starsPaymentSuccess": "Payment successful! Spin result sent to Telegram.",
-    "starsPaymentSuccessCheckHistory": "Payment successful! Check history or Telegram for the result.",
+    "starsPaymentSuccess": "Payment successful! Spin result sent to Web.",
+    "starsPaymentSuccessCheckHistory": "Payment successful! Check history or Web for the result.",
     "starsPaymentFailed": "Payment failed. Please try again.",
-    "starsPaymentRedirected": "Telegram will open for payment. Refresh the page after payment.",
+    "starsPaymentRedirected": "Web will open for payment. Refresh the page after payment.",
     "starsNotAvailable": "Star payments are currently unavailable. Contact support.",
-    "confirmStarsPayment": "You will be redirected to Telegram to pay for one wheel spin.",
+    "confirmStarsPayment": "You will be redirected to Web to pay for one wheel spin.",
     "payStars": "Pay {{count}} ⭐",
     "youWon": "You won",
     "noPrize": "No luck this time...",
@@ -1322,7 +1314,7 @@
       "period": "Period",
       "days": "d",
       "exportCsv": "Export CSV",
-      "exportSuccess": "CSV sent to your Telegram",
+      "exportSuccess": "CSV sent to your Web",
       "exportError": "Failed to export",
       "user": "User",
       "tariff": "Tariff",
@@ -1438,7 +1430,7 @@
       "conditions": "Display conditions",
       "userTypeFilter": "User type",
       "userTypeAll": "All",
-      "userTypeTelegram": "Telegram",
+      "userTypeTelegram": "Web",
       "userTypeEmail": "Email",
       "firstTopupFilter": "First top-up",
       "firstTopupAny": "Any",
@@ -1584,7 +1576,7 @@
         "promocodes": "Promocodes",
         "promoPrefix": "Promo code prefix"
       },
-      "starsNotEnabledGlobally": "Star payments are not enabled in Payment Methods. Enable \"Telegram Stars\" in the Payment Methods section.",
+      "starsNotEnabledGlobally": "Star payments are not enabled in Payment Methods. Enable \"Web Stars\" in the Payment Methods section.",
       "prizes": {
         "addPrize": "Add Prize",
         "editPrize": "Edit Prize",
@@ -1682,12 +1674,11 @@
         "email": "Email users"
       },
       "channel": {
-        "telegram": "Telegram",
+        "telegram": "Web",
         "email": "Email",
         "both": "Both"
       },
       "selectChannel": "Broadcast channel",
-      "telegramSection": "Telegram broadcast",
       "emailSection": "Email broadcast",
       "selectEmailFilter": "Select email audience",
       "selectEmailFilterPlaceholder": "Select filter...",
@@ -1697,7 +1688,6 @@
       "emailContentHint": "HTML supported",
       "emailContentPlaceholder": "<p>Hello, {{user_name}}!</p>\n<p>Your message here...</p>",
       "emailVariables": "Available variables",
-      "enableTelegram": "Telegram",
       "enableEmail": "Email",
       "sendingBoth": "2 broadcasts will be created",
       "bothCreated": "Broadcasts created",
@@ -1836,7 +1826,7 @@
       "animatedBackground": "Animated background",
       "animatedBackgroundDesc": "Show animated background effects",
       "autoFullscreen": "Auto fullscreen",
-      "autoFullscreenDesc": "Auto expand in Telegram",
+      "autoFullscreenDesc": "Auto expand in Web",
       "availableThemes": "Available themes",
       "colors": {
         "background": "Background",
@@ -1864,8 +1854,8 @@
       "resetAllColors": "Reset all colors",
       "statusColors": "Status colors",
       "categories": {
-        "TELEGRAM_WIDGET": "Telegram Login Widget",
-        "TELEGRAM_OIDC": "Telegram Login (OIDC)"
+        "TELEGRAM_WIDGET": "Web Login Widget",
+        "TELEGRAM_OIDC": "Web Login (OIDC)"
       },
       "settingNames": {
         "Telegram Widget Size": "Widget Size",
@@ -1939,7 +1929,7 @@
       "openIn": "Open in",
       "openMode": {
         "external": "External browser",
-        "webapp": "Telegram miniapp"
+        "webapp": "web app"
       },
       "invalidUrl": "Please provide a valid URL (http:// or https://) for all custom buttons"
     },
@@ -2035,7 +2025,7 @@
       "reminderCooldown": "Reminder interval (minutes)",
       "reminderCooldownDesc": "Minimum time between reminders (1-120 minutes)",
       "settingsUpdateError": "Error saving settings",
-      "copyTelegramId": "Click to copy Telegram ID",
+      "copyTelegramId": "Click to copy Web ID",
       "viewUser": "Profile",
       "cabinetNotifications": "Cabinet Notifications",
       "userNotificationsEnabled": "User Notifications",
@@ -2394,7 +2384,7 @@
         "loadError": "Failed to load withdrawal details",
         "userInfo": "User Information",
         "username": "Username",
-        "telegramId": "Telegram ID",
+        "telegramId": "Web ID",
         "balance": "Balance",
         "totalReferrals": "Total referrals",
         "totalEarnings": "Total earnings",
@@ -3019,8 +3009,8 @@
         "sendTo": "Send to",
         "segment": "Segment",
         "user": "User",
-        "userIdPlaceholder": "Telegram ID or User ID",
-        "searchUserPlaceholder": "Search by name, username or Telegram ID...",
+        "userIdPlaceholder": "Web ID or User ID",
+        "searchUserPlaceholder": "Search by name, username or Web ID...",
         "noUsersFound": "No users found",
         "hasSubscription": "Sub",
         "preview": "Preview",
@@ -3199,7 +3189,7 @@
       "subtitle": "Assign and manage user roles",
       "assignSection": "Assign Role",
       "userLabel": "User",
-      "searchPlaceholder": "Search by name, username, Telegram ID, or email...",
+      "searchPlaceholder": "Search by name, username, Web ID, or email...",
       "clearUser": "Clear selected user",
       "noUsersFound": "No users found",
       "roleLabel": "Role",
@@ -3648,7 +3638,7 @@
   "banSystem": {
     "title": "Ban Monitoring",
     "subtitle": "BedolagaBan system management",
-    "contactTelegram": "Write in Telegram",
+    "contactTelegram": "Write in Web",
     "notConfigured": "Ban system is not configured",
     "configureHint": "Set BAN_SYSTEM_API_URL and BAN_SYSTEM_API_TOKEN in configuration",
     "loadError": "Failed to load data",
@@ -3926,12 +3916,12 @@
   "profile": {
     "title": "Profile",
     "accountInfo": "Account Information",
-    "telegramId": "Telegram ID",
+    "telegramId": "Web ID",
     "username": "Username",
     "name": "Name",
     "registeredAt": "Registered",
     "emailAuth": "Email Authentication",
-    "linkEmailDescription": "Link your email to log in without Telegram. After linking, you'll receive a verification email.",
+    "linkEmailDescription": "Use your email for account login.",
     "linkEmail": "Link Email",
     "emailRequired": "Email is required",
     "invalidEmail": "Please enter a valid email address",
@@ -4002,17 +3992,14 @@
       "linkSuccess": "Account connected successfully",
       "unlinkSuccess": "Account disconnected successfully",
       "linkError": "Failed to connect account",
-      "telegramLinkUnavailable": "Telegram linking is temporarily unavailable. Use the bot:",
+      "telegramLinkUnavailable": "Web linking is temporarily unavailable. Use the bot:",
       "unlinkError": "Failed to disconnect account",
       "goToAccounts": "Connected Accounts",
       "linking": "Linking account...",
-      "linkingTelegram": "Connecting Telegram...",
-      "returnToTelegram": "Return to Telegram to continue",
-      "openTelegram": "Open Telegram",
       "continueInBrowser": "Continue authorization in the opened browser",
       "pollingTimeout": "Authorization check timed out. Refresh the page if you completed linking.",
       "providers": {
-        "telegram": "Telegram",
+        "telegram": "Web",
         "email": "Email",
         "google": "Google",
         "yandex": "Yandex",
@@ -4175,14 +4162,6 @@
       "error": "Failed to cancel promo code. Please try again later."
     }
   },
-  "telegramRedirect": {
-    "maxRetries": "Maximum retry attempts exceeded. Please try again later.",
-    "redirecting": "Redirecting...",
-    "loginAlternative": "Sign in another way",
-    "openInTelegram": "Open in Telegram",
-    "openInTelegramDesc": "To sign in automatically, open this app through the Telegram bot",
-    "redirectToLogin": "Redirecting to login page..."
-  },
   "deepLink": {
     "connecting": "Connecting to",
     "redirecting": "Redirecting in",
@@ -4263,7 +4242,7 @@
     "contactLabel": "Your email or @username",
     "yourContact": "Your email or @username",
     "contactPlaceholder": "email@example.com or @username",
-    "contactHint": "Enter email or Telegram @username",
+    "contactHint": "Enter email or Web @username",
     "recipientLabel": "Gift recipient",
     "recipientPlaceholder": "Recipient email or @username",
     "giftMessageLabel": "Greeting (optional)",
@@ -4313,9 +4292,9 @@
     "giftSentSuccess": "Gift sent!",
     "giftSentDesc": "Recipient will be notified by email",
     "giftPendingActivationDesc": "The recipient already has an active subscription. They will receive a link to activate the gift.",
-    "giftTelegramSent": "Gift notification sent to recipient via Telegram",
+    "giftTelegramSent": "Gift notification sent to recipient via Web",
     "giftTelegramNotInBot": "Recipient hasn't started the bot yet. Send them this link:",
-    "giftTelegramPendingSent": "Activation request sent to recipient via Telegram",
+    "giftTelegramPendingSent": "Activation request sent to recipient via Web",
     "giftTelegramPendingNotInBot": "Recipient hasn't started the bot yet. Send them the bot link so they can activate the gift:",
     "openBot": "Open bot",
     "autoLoginFailed": "Auto-login failed",
@@ -4351,8 +4330,8 @@
     "choosePeriod": "Choose period",
     "chooseTariff": "Choose tariff",
     "recipient": "Recipient",
-    "recipientPlaceholder": "Email or @telegram",
-    "recipientHint": "Enter email or Telegram username",
+    "recipientPlaceholder": "Email or @web",
+    "recipientHint": "Enter email or Web username",
     "giftMessage": "Greeting",
     "giftMessagePlaceholder": "Add a personal message (optional)",
     "paymentMode": "Payment method",
@@ -4400,7 +4379,7 @@
       "activate": "Activate"
     },
     "warning": {
-      "telegram_unresolvable": "Could not verify this Telegram username. The recipient may not receive a notification about the gift."
+      "telegram_unresolvable": "Could not verify this Web username. The recipient may not receive a notification about the gift."
     },
     "pageTitle": "Gifts",
     "tabBuy": "Buy",

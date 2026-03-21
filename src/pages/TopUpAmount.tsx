@@ -13,6 +13,7 @@ import { staggerContainer, staggerItem } from '@/components/motion/transitions';
 import type { PaymentMethod } from '../types';
 import BentoCard from '../components/ui/BentoCard';
 import { saveTopUpPendingInfo } from '../utils/topUpStorage';
+import { isTelegramPaymentMethod } from '@/config/webFeatures';
 
 // Icons
 const StarIcon = () => (
@@ -154,6 +155,12 @@ export default function TopUpAmount() {
     }
   }, [cachedMethods, method, navigate, searchParams]);
 
+  useEffect(() => {
+    if (method && isTelegramPaymentMethod(method.id)) {
+      navigate('/balance/top-up', { replace: true });
+    }
+  }, [method, navigate]);
+
   const starsPaymentMutation = useMutation({
     mutationFn: (amountKopeks: number) => balanceApi.createStarsInvoice(amountKopeks),
     onSuccess: async (data) => {
@@ -222,9 +229,7 @@ export default function TopUpAmount() {
     onError: (err: unknown) => {
       const detail =
         (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail || '';
-      setError(
-        detail.includes('not yet implemented') ? t('balance.useBot') : detail || t('common.error'),
-      );
+      setError(detail || t('common.error'));
     },
   });
 

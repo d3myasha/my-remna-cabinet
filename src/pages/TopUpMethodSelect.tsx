@@ -8,6 +8,7 @@ import { useCurrency } from '../hooks/useCurrency';
 import { Card } from '@/components/data-display/Card';
 import { staggerContainer, staggerItem } from '@/components/motion/transitions';
 import PaymentMethodIcon from '@/components/PaymentMethodIcon';
+import { isTelegramPaymentMethod } from '@/config/webFeatures';
 
 export default function TopUpMethodSelect() {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ export default function TopUpMethodSelect() {
     queryKey: ['payment-methods'],
     queryFn: balanceApi.getPaymentMethods,
   });
+  const webPaymentMethods = paymentMethods?.filter((m) => !isTelegramPaymentMethod(m.id)) ?? [];
 
   const handleMethodClick = (methodId: string) => {
     const params = new URLSearchParams();
@@ -49,13 +51,13 @@ export default function TopUpMethodSelect() {
             <div className="flex items-center justify-center py-12">
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent-500 border-t-transparent" />
             </div>
-          ) : !paymentMethods || paymentMethods.length === 0 ? (
+          ) : webPaymentMethods.length === 0 ? (
             <div className="py-6 text-center text-sm text-dark-400">
               {t('balance.noPaymentMethods')}
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {paymentMethods.map((method) => {
+              {webPaymentMethods.map((method) => {
                 const methodKey = method.id.toLowerCase().replace(/-/g, '_');
                 const translatedName = t(`balance.paymentMethods.${methodKey}.name`, {
                   defaultValue: '',

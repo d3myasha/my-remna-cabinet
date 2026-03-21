@@ -10,6 +10,7 @@ import { Card } from '@/components/data-display/Card/Card';
 import { Button } from '@/components/primitives/Button/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { staggerContainer, staggerItem } from '@/components/motion/transitions';
+import { TELEGRAM_PAYMENTS_ENABLED } from '@/config/webFeatures';
 
 // Icons
 const StarIcon = () => (
@@ -102,7 +103,7 @@ export default function Wheel() {
   const [targetRotation, setTargetRotation] = useState<number | null>(null);
   const [spinResult, setSpinResult] = useState<SpinResult | null>(null);
   const [paymentType, setPaymentType] = useState<'telegram_stars' | 'subscription_days'>(
-    'telegram_stars',
+    'subscription_days',
   );
   const [isPayingStars, setIsPayingStars] = useState(false);
   const [historyExpanded, setHistoryExpanded] = useState(false);
@@ -128,7 +129,8 @@ export default function Wheel() {
     if (!config || paymentTypeInitialized.current) return;
     paymentTypeInitialized.current = true;
 
-    const starsEnabled = config.spin_cost_stars_enabled && config.spin_cost_stars;
+    const starsEnabled =
+      TELEGRAM_PAYMENTS_ENABLED && config.spin_cost_stars_enabled && config.spin_cost_stars;
     const daysEnabled = config.spin_cost_days_enabled && config.spin_cost_days;
 
     if (starsEnabled) {
@@ -499,7 +501,8 @@ export default function Wheel() {
     );
   }
 
-  const starsEnabled = config.spin_cost_stars_enabled && config.spin_cost_stars;
+  const starsEnabled =
+    TELEGRAM_PAYMENTS_ENABLED && config.spin_cost_stars_enabled && config.spin_cost_stars;
   const daysEnabled = config.spin_cost_days_enabled && config.spin_cost_days;
   const bothMethodsAvailable = !!(starsEnabled && daysEnabled);
 

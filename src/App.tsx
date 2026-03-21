@@ -15,8 +15,6 @@ import { saveReturnUrl } from './utils/token';
 import { useAnalyticsCounters } from './hooks/useAnalyticsCounters';
 // Auth pages - load immediately (small)
 import Login from './pages/Login';
-import TelegramCallback from './pages/TelegramCallback';
-import TelegramRedirect from './pages/TelegramRedirect';
 import DeepLinkRedirect from './pages/DeepLinkRedirect';
 import VerifyEmail from './pages/VerifyEmail';
 import ResetPassword from './pages/ResetPassword';
@@ -48,7 +46,6 @@ const TopUpMethodSelect = lazy(() => import('./pages/TopUpMethodSelect'));
 const TopUpAmount = lazy(() => import('./pages/TopUpAmount'));
 const TopUpResult = lazy(() => import('./pages/TopUpResult'));
 const ConnectedAccounts = lazy(() => import('./pages/ConnectedAccounts'));
-const LinkTelegramCallback = lazy(() => import('./pages/LinkTelegramCallback'));
 const MergeAccounts = lazy(() => import('./pages/MergeAccounts'));
 
 // Admin pages - lazy load (only for admins)
@@ -194,9 +191,6 @@ function App() {
       <Routes>
         {/* Public routes */}
         <Route path="/login" element={<Login />} />
-        <Route path="/auth/telegram/callback" element={<TelegramCallback />} />
-        <Route path="/auth/telegram" element={<TelegramRedirect />} />
-        <Route path="/tg" element={<TelegramRedirect />} />
         <Route path="/connect" element={<DeepLinkRedirect />} />
         <Route path="/add" element={<DeepLinkRedirect />} />
         <Route path="/auth/oauth/callback" element={<OAuthCallback />} />
@@ -380,16 +374,6 @@ function App() {
             <ProtectedRoute>
               <LazyPage>
                 <ConnectedAccounts />
-              </LazyPage>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/auth/link/telegram/callback"
-          element={
-            <ProtectedRoute>
-              <LazyPage>
-                <LinkTelegramCallback />
               </LazyPage>
             </ProtectedRoute>
           }

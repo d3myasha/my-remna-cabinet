@@ -1,5 +1,4 @@
 export const METHOD_LABELS: Record<string, string> = {
-  telegram_stars: 'Telegram Stars',
   tribute: 'Tribute',
   cryptobot: 'CryptoBot',
   heleket: 'Heleket',

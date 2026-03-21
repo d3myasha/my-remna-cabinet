@@ -153,28 +153,20 @@
     "confirmPassword": "确认密码",
     "forgotPassword": "忘记密码？",
     "resetPassword": "重置密码",
-    "loginWithTelegram": "通过Telegram登录",
     "loginWithEmail": "通过邮箱登录",
     "noAccount": "没有账户？",
     "hasAccount": "已有账户？",
     "or": "或",
-    "registerHint": "要通过邮箱注册，请先通过Telegram登录，然后在设置中绑定邮箱。",
-    "telegramRequired": "需要Telegram授权",
-    "telegramRetryFailed": "授权失败。请关闭应用后重新打开。",
-    "telegramReopenHint": "如果问题持续存在，请关闭并重新打开应用",
-    "telegramNotConfigured": "Telegram机器人未配置",
-    "telegramUnavailable": "Telegram登录暂时不可用",
+    "registerHint": "要通过邮箱注册，请先通过Web登录，然后在设置中绑定邮箱。",
     "authenticating": "正在验证...",
     "orOpenInApp": "或在应用中打开机器人",
     "loginFailed": "登录失败",
-    "telegramWidgetBlocked": "Telegram登录小部件不可用。请使用机器人登录：",
-    "openBotToLogin": "打开机器人登录",
     "waitingForConfirmation": "等待确认...",
     "deepLinkExpired": "链接已过期，请重试。",
     "tryAgain": "重试",
     "welcomeBack": "欢迎回来！",
     "loginTitle": "登录个人中心",
-    "loginSubtitle": "通过Telegram或邮箱登录",
+    "loginSubtitle": "通过Web或邮箱登录",
     "referralInvite": "您已通过推荐链接受邀！",
     "checkEmail": "请查收邮件",
     "verificationSent": "我们已发送验证链接至：",
@@ -484,7 +476,7 @@
         "description": "通过CryptoBot加密货币支付"
       },
       "telegram_stars": {
-        "description": "通过Telegram Stars支付"
+        "description": "通过Web Stars支付"
       },
       "tribute": {
         "description": "通过Tribute银行卡支付"
@@ -506,7 +498,7 @@
     "minAmount": "最小",
     "maxAmount": "最大",
     "notAvailable": "不可用",
-    "useBot": "请使用Telegram机器人充值。",
+    "useBot": "请使用Web机器人充值。",
     "page": "第 {{current}} 页，共 {{total}} 页",
     "invalidAmount": "金额无效",
     "promocode": {
@@ -532,7 +524,7 @@
     "openPaymentPage": "打开支付页面",
     "errors": {
       "noPaymentLink": "服务器未返回支付链接",
-      "starsOnlyInTelegram": "Stars支付仅在Telegram Mini App中可用",
+      "starsOnlyInTelegram": "Stars支付仅在web app中可用",
       "generic": "错误：{{details}}",
       "invoiceFailed": "创建账单失败",
       "rateLimit": "请等待 {{seconds}} 秒",
@@ -683,7 +675,7 @@
       "fields": {
         "companyName": "公司名称",
         "companyNamePlaceholder": "您的公司或品牌名称",
-        "telegramChannel": "Telegram频道",
+        "telegramChannel": "Web频道",
         "telegramChannelPlaceholder": "@yourchannel",
         "websiteUrl": "网站地址",
         "websiteUrlPlaceholder": "https://example.com",
@@ -774,7 +766,7 @@
     "spinsRemaining": "今日剩余次数",
     "choosePayment": "选择支付方式",
     "stars": "Stars",
-    "telegramStars": "Telegram Stars",
+    "telegramStars": "Web Stars",
     "days": "天",
     "days_other": "{{count}} 天",
     "subscriptionDays": "订阅天数",
@@ -792,7 +784,7 @@
     "noPrize": "这次没有中奖...",
     "payWithDays": "用天数支付",
     "youWon": "恭喜中奖",
-    "starsPaymentSuccessCheckHistory": "支付成功！请查看历史记录或Telegram获取结果。",
+    "starsPaymentSuccessCheckHistory": "支付成功！请查看历史记录或Web获取结果。",
     "errors": {
       "networkError": "网络错误",
       "loadFailed": "加载转盘配置失败",
@@ -800,16 +792,16 @@
       "cannotSpin": "当前无法抽奖",
       "insufficientBalance": "余额不足",
       "topUpRequired": "请充值以支付抽奖费用",
-      "starsNotAvailable": "Stars支付不可用。请通过Telegram打开应用。",
+      "starsNotAvailable": "Stars支付不可用。请通过Web打开应用。",
       "noSubscription": "需要有效订阅才能转动轮盘。请先激活订阅。"
     },
     "payWithStars": "支付 {stars} Stars",
     "processingPayment": "处理中...",
-    "starsPaymentSuccess": "支付成功！抽奖结果已发送到Telegram。",
+    "starsPaymentSuccess": "支付成功！抽奖结果已发送到Web。",
     "starsPaymentFailed": "支付失败。请重试。",
-    "starsPaymentRedirected": "将打开Telegram进行支付。支付后请刷新页面。",
+    "starsPaymentRedirected": "将打开Web进行支付。支付后请刷新页面。",
     "starsNotAvailable": "星星支付暂不可用。请联系客服。",
-    "confirmStarsPayment": "您将被重定向到Telegram进行一次转盘支付。",
+    "confirmStarsPayment": "您将被重定向到Web进行一次转盘支付。",
     "payStars": "支付 {{count}} ⭐",
     "noHistory": "暂无抽奖记录",
     "banner": {
@@ -1156,7 +1148,7 @@
       "period": "周期",
       "days": "天",
       "exportCsv": "导出CSV",
-      "exportSuccess": "CSV已发送到您的Telegram",
+      "exportSuccess": "CSV已发送到您的Web",
       "exportError": "导出失败",
       "user": "用户",
       "tariff": "套餐",
@@ -1214,7 +1206,7 @@
       "conditions": "显示条件",
       "userTypeFilter": "用户类型",
       "userTypeAll": "全部",
-      "userTypeTelegram": "Telegram",
+      "userTypeTelegram": "Web",
       "userTypeEmail": "电子邮件",
       "firstTopupFilter": "首次充值",
       "firstTopupAny": "不重要",
@@ -1311,7 +1303,7 @@
         "limitsAndRtp": "限制和RTP",
         "promocodes": "促销码"
       },
-      "starsNotEnabledGlobally": "星星支付未在支付方式中启用。请在「支付方式」中启用「Telegram Stars」。",
+      "starsNotEnabledGlobally": "星星支付未在支付方式中启用。请在「支付方式」中启用「Web Stars」。",
       "prizes": {
         "addPrize": "添加奖品",
         "editPrize": "编辑奖品",
@@ -1406,7 +1398,6 @@
         "source": "按来源",
         "tariff": "按套餐"
       },
-      "enableTelegram": "Telegram",
       "enableEmail": "Email",
       "sendingBoth": "将创建2个群发",
       "bothCreated": "群发已创建",
@@ -1545,7 +1536,7 @@
       "animatedBackground": "动画背景",
       "animatedBackgroundDesc": "显示动画背景效果",
       "autoFullscreen": "自动全屏",
-      "autoFullscreenDesc": "在Telegram中自动展开",
+      "autoFullscreenDesc": "在Web中自动展开",
       "availableThemes": "可用主题",
       "colors": {
         "background": "背景",
@@ -1573,8 +1564,8 @@
       "resetAllColors": "重置所有颜色",
       "statusColors": "状态颜色",
       "categories": {
-        "TELEGRAM_WIDGET": "Telegram Login Widget",
-        "TELEGRAM_OIDC": "Telegram Login (OIDC)"
+        "TELEGRAM_WIDGET": "Web Login Widget",
+        "TELEGRAM_OIDC": "Web Login (OIDC)"
       },
       "settingNames": {
         "Telegram Widget Size": "小部件大小",
@@ -1639,7 +1630,7 @@
       "openIn": "打开方式",
       "openMode": {
         "external": "外部浏览器",
-        "webapp": "Telegram 小程序"
+        "webapp": "Web 小程序"
       },
       "invalidUrl": "请为所有自定义按钮提供有效的URL（http:// 或 https://）"
     },
@@ -1738,7 +1729,7 @@
       "adminNotificationsEnabled": "管理员通知",
       "adminNotificationsEnabledDesc": "向管理员发送新工单和回复通知",
       "cabinetNotifications": "面板通知",
-      "copyTelegramId": "点击复制Telegram ID",
+      "copyTelegramId": "点击复制Web ID",
       "viewUser": "用户",
       "userNotificationsEnabled": "用户通知",
       "userNotificationsEnabledDesc": "向用户发送管理员回复通知"
@@ -2082,7 +2073,7 @@
         "loadError": "加载提现详情失败",
         "userInfo": "用户信息",
         "username": "用户名",
-        "telegramId": "Telegram ID",
+        "telegramId": "Web ID",
         "balance": "余额",
         "totalReferrals": "总推荐数",
         "totalEarnings": "总收益",
@@ -2645,8 +2636,8 @@
         "sendTo": "发送对象",
         "segment": "分组",
         "user": "用户",
-        "userIdPlaceholder": "Telegram ID 或 User ID",
-        "searchUserPlaceholder": "按姓名、用户名或Telegram ID搜索...",
+        "userIdPlaceholder": "Web ID 或 User ID",
+        "searchUserPlaceholder": "按姓名、用户名或Web ID搜索...",
         "noUsersFound": "未找到用户",
         "hasSubscription": "订阅",
         "preview": "预览",
@@ -2940,7 +2931,7 @@
       "subtitle": "分配和管理用户角色",
       "assignSection": "分配角色",
       "userLabel": "用户",
-      "searchPlaceholder": "按名称、用户名、Telegram ID或邮箱搜索...",
+      "searchPlaceholder": "按名称、用户名、Web ID或邮箱搜索...",
       "clearUser": "清除已选用户",
       "noUsersFound": "未找到用户",
       "roleLabel": "角色",
@@ -3313,12 +3304,12 @@
   "profile": {
     "title": "个人资料",
     "accountInfo": "账户信息",
-    "telegramId": "Telegram ID",
+    "telegramId": "Web ID",
     "username": "用户名",
     "name": "姓名",
     "registeredAt": "注册时间",
     "emailAuth": "邮箱认证",
-    "linkEmailDescription": "绑定邮箱以便无需Telegram登录。绑定后将收到验证邮件。",
+    "linkEmailDescription": "绑定邮箱以便无需Web登录。绑定后将收到验证邮件。",
     "linkEmail": "绑定邮箱",
     "emailRequired": "请输入邮箱",
     "invalidEmail": "请输入有效的电子邮件地址",
@@ -3389,17 +3380,14 @@
       "linkSuccess": "账户关联成功",
       "unlinkSuccess": "账户取消关联成功",
       "linkError": "关联账户失败",
-      "telegramLinkUnavailable": "Telegram关联暂时不可用。请使用机器人：",
+      "telegramLinkUnavailable": "Web关联暂时不可用。请使用机器人：",
       "unlinkError": "取消关联失败",
       "goToAccounts": "关联账户",
       "linking": "正在关联账户...",
-      "linkingTelegram": "正在关联 Telegram...",
-      "returnToTelegram": "返回 Telegram 继续操作",
-      "openTelegram": "打开 Telegram",
       "continueInBrowser": "请在打开的浏览器中继续授权",
       "pollingTimeout": "授权检查超时。如果您已完成关联，请刷新页面。",
       "providers": {
-        "telegram": "Telegram",
+        "telegram": "Web",
         "email": "邮箱",
         "google": "Google",
         "yandex": "Yandex",
@@ -3559,14 +3547,6 @@
       "error": "取消优惠码失败，请稍后重试。"
     }
   },
-  "telegramRedirect": {
-    "maxRetries": "重试次数已达上限。请稍后再试。",
-    "redirecting": "正在跳转...",
-    "loginAlternative": "使用其他方式登录",
-    "openInTelegram": "在Telegram中打开",
-    "openInTelegramDesc": "要自动登录，请通过Telegram机器人打开此应用",
-    "redirectToLogin": "正在跳转到登录页面..."
-  },
   "deepLink": {
     "connecting": "正在连接",
     "redirecting": "将在",
@@ -3619,7 +3599,7 @@
     "configureHint": "在配置中设置BAN_SYSTEM_API_URL和BAN_SYSTEM_API_TOKEN",
     "loadError": "加载数据失败",
     "notConfigured": "封禁系统未配置",
-    "contactTelegram": "在Telegram中联系",
+    "contactTelegram": "在Web中联系",
     "tabs": {
       "dashboard": "统计",
       "nodes": "节点",
@@ -3765,7 +3745,7 @@
     "contactLabel": "您的邮箱或 @用户名",
     "yourContact": "您的邮箱或 @用户名",
     "contactPlaceholder": "email@example.com 或 @username",
-    "contactHint": "输入邮箱或 Telegram @用户名",
+    "contactHint": "输入邮箱或 Web @用户名",
     "recipientLabel": "赠送对象",
     "recipientPlaceholder": "收件人邮箱或 @用户名",
     "giftMessageLabel": "祝福语（可选）",
@@ -3815,9 +3795,9 @@
     "giftSentSuccess": "礼物已发送！",
     "giftSentDesc": "收件人将通过邮件收到通知",
     "giftPendingActivationDesc": "收件人已有活跃订阅。他们将收到激活礼物的链接。",
-    "giftTelegramSent": "已通过 Telegram 向收件人发送通知",
+    "giftTelegramSent": "已通过 Web 向收件人发送通知",
     "giftTelegramNotInBot": "收件人尚未启动机器人。请将此链接发送给他们：",
-    "giftTelegramPendingSent": "已通过 Telegram 向收件人发送激活请求",
+    "giftTelegramPendingSent": "已通过 Web 向收件人发送激活请求",
     "giftTelegramPendingNotInBot": "收件人尚未启动机器人。请将机器人链接发送给他们以激活礼物：",
     "openBot": "打开机器人",
     "autoLoginFailed": "自动登录失败",
@@ -3845,8 +3825,8 @@
     "choosePeriod": "选择时长",
     "chooseTariff": "选择套餐",
     "recipient": "收件人",
-    "recipientPlaceholder": "邮箱或 @telegram",
-    "recipientHint": "输入邮箱或 Telegram 用户名",
+    "recipientPlaceholder": "邮箱或 @web",
+    "recipientHint": "输入邮箱或 Web 用户名",
     "giftMessage": "祝福语",
     "giftMessagePlaceholder": "添加个人消息（可选）",
     "paymentMode": "支付方式",
@@ -3894,7 +3874,7 @@
       "activate": "激活"
     },
     "warning": {
-      "telegram_unresolvable": "无法验证此 Telegram 用户名。收件人可能不会收到礼物通知。"
+      "telegram_unresolvable": "无法验证此 Web 用户名。收件人可能不会收到礼物通知。"
     }
   }
 }

@@ -153,28 +153,20 @@
     "confirmPassword": "تایید رمز عبور",
     "forgotPassword": "رمز عبور را فراموش کردید؟",
     "resetPassword": "بازنشانی رمز عبور",
-    "loginWithTelegram": "ورود با تلگرام",
     "loginWithEmail": "ورود با ایمیل",
     "noAccount": "حساب کاربری ندارید؟",
     "hasAccount": "قبلاً حساب دارید؟",
     "or": "یا",
-    "registerHint": "برای ثبت نام با ایمیل، ابتدا با تلگرام وارد شوید، سپس ایمیل خود را در تنظیمات متصل کنید.",
-    "telegramRequired": "نیاز به تایید تلگرام",
-    "telegramRetryFailed": "تایید هویت ناموفق بود. برنامه را ببندید و دوباره باز کنید.",
-    "telegramReopenHint": "اگر مشکل ادامه دارد، برنامه را ببندید و دوباره باز کنید",
-    "telegramNotConfigured": "ربات تلگرام پیکربندی نشده",
-    "telegramUnavailable": "ورود از طریق تلگرام موقتاً در دسترس نیست",
+    "registerHint": "برای ثبت نام با ایمیل، ابتدا با وب وارد شوید، سپس ایمیل خود را در تنظیمات متصل کنید.",
     "authenticating": "در حال تایید هویت...",
     "orOpenInApp": "یا ربات را در برنامه باز کنید",
     "loginFailed": "ورود ناموفق",
-    "telegramWidgetBlocked": "ویجت ورود تلگرام در دسترس نیست. از طریق ربات وارد شوید:",
-    "openBotToLogin": "باز کردن ربات برای ورود",
     "waitingForConfirmation": "در انتظار تایید...",
     "deepLinkExpired": "لینک منقضی شده است. لطفا دوباره تلاش کنید.",
     "tryAgain": "تلاش مجدد",
     "welcomeBack": "خوش آمدید!",
     "loginTitle": "ورود به کابین",
-    "loginSubtitle": "با تلگرام یا ایمیل وارد شوید",
+    "loginSubtitle": "با وب یا ایمیل وارد شوید",
     "referralInvite": "شما از طریق لینک معرفی دعوت شده‌اید!",
     "checkEmail": "ایمیل خود را بررسی کنید",
     "verificationSent": "لینک تایید به این آدرس ارسال شد:",
@@ -484,7 +476,7 @@
         "description": "پرداخت با ارز دیجیتال"
       },
       "telegram_stars": {
-        "description": "پرداخت با Telegram Stars"
+        "description": "پرداخت با Web Stars"
       },
       "tribute": {
         "description": "پرداخت با کارت بانکی از طریق Tribute"
@@ -506,7 +498,7 @@
     "minAmount": "حداقل",
     "maxAmount": "حداکثر",
     "notAvailable": "در دسترس نیست",
-    "useBot": "لطفاً برای شارژ از ربات تلگرام استفاده کنید.",
+    "useBot": "لطفاً برای شارژ از ربات وب استفاده کنید.",
     "page": "صفحه {{current}} از {{total}}",
     "invalidAmount": "مبلغ نامعتبر",
     "promocode": {
@@ -532,7 +524,7 @@
     "openPaymentPage": "باز کردن صفحه پرداخت",
     "errors": {
       "noPaymentLink": "سرور لینک پرداخت را برنگرداند",
-      "starsOnlyInTelegram": "پرداخت Stars فقط در Telegram Mini App در دسترس است",
+      "starsOnlyInTelegram": "پرداخت Stars فقط در web app در دسترس است",
       "generic": "خطا: {{details}}",
       "invoiceFailed": "ایجاد فاکتور ناموفق بود",
       "rateLimit": "لطفاً {{seconds}} ثانیه صبر کنید",
@@ -683,7 +675,7 @@
       "fields": {
         "companyName": "نام شرکت",
         "companyNamePlaceholder": "نام شرکت یا برند شما",
-        "telegramChannel": "کانال تلگرام",
+        "telegramChannel": "کانال وب",
         "telegramChannelPlaceholder": "@yourchannel",
         "websiteUrl": "آدرس وب‌سایت",
         "websiteUrlPlaceholder": "https://example.com",
@@ -774,7 +766,7 @@
     "spinsRemaining": "تعداد چرخش باقی‌مانده امروز",
     "choosePayment": "روش پرداخت را انتخاب کنید",
     "stars": "Stars",
-    "telegramStars": "Telegram Stars",
+    "telegramStars": "Web Stars",
     "days": "روز",
     "days_other": "{{count}} روز",
     "subscriptionDays": "روز اشتراک",
@@ -796,16 +788,16 @@
       "cannotSpin": "فعلاً امکان چرخش نیست",
       "insufficientBalance": "موجودی کافی نیست",
       "topUpRequired": "برای پرداخت شارژ کنید",
-      "starsNotAvailable": "پرداخت Stars در دسترس نیست. برنامه را از طریق تلگرام باز کنید.",
+      "starsNotAvailable": "پرداخت Stars در دسترس نیست. برنامه را از طریق وب باز کنید.",
       "noSubscription": "برای چرخاندن گردونه نیاز به اشتراک فعال دارید. ابتدا اشتراک خود را فعال کنید."
     },
     "payWithStars": "پرداخت {stars} Stars",
     "processingPayment": "در حال پردازش...",
-    "starsPaymentSuccess": "پرداخت موفق! نتیجه به تلگرام ارسال شد.",
+    "starsPaymentSuccess": "پرداخت موفق! نتیجه به وب ارسال شد.",
     "starsPaymentFailed": "پرداخت ناموفق. دوباره تلاش کنید.",
-    "starsPaymentRedirected": "تلگرام برای پرداخت باز می‌شود. پس از پرداخت صفحه را بازخوانی کنید.",
+    "starsPaymentRedirected": "وب برای پرداخت باز می‌شود. پس از پرداخت صفحه را بازخوانی کنید.",
     "starsNotAvailable": "پرداخت با ستاره در حال حاضر در دسترس نیست. با پشتیبانی تماس بگیرید.",
-    "confirmStarsPayment": "شما به تلگرام برای پرداخت یک چرخش منتقل خواهید شد.",
+    "confirmStarsPayment": "شما به وب برای پرداخت یک چرخش منتقل خواهید شد.",
     "payStars": "پرداخت {{count}} ⭐",
     "noHistory": "هنوز تاریخچه‌ای نیست",
     "banner": {
@@ -815,7 +807,7 @@
     },
     "noPrize": "این بار شانس نیاوردید...",
     "payWithDays": "پرداخت با روز",
-    "starsPaymentSuccessCheckHistory": "پرداخت موفق! تاریخچه یا تلگرام را بررسی کنید.",
+    "starsPaymentSuccessCheckHistory": "پرداخت موفق! تاریخچه یا وب را بررسی کنید.",
     "youWon": "شما برنده شدید"
   },
   "admin": {
@@ -1156,7 +1148,7 @@
       "period": "دوره",
       "days": "روز",
       "exportCsv": "خروجی CSV",
-      "exportSuccess": "CSV به تلگرام شما ارسال شد",
+      "exportSuccess": "CSV به وب شما ارسال شد",
       "exportError": "خطا در خروجی",
       "user": "کاربر",
       "tariff": "تعرفه",
@@ -1237,7 +1229,7 @@
         "limitsAndRtp": "محدودیت‌ها و RTP",
         "promocodes": "کدهای تخفیف"
       },
-      "starsNotEnabledGlobally": "پرداخت با ستاره در روش‌های پرداخت فعال نیست. «Telegram Stars» را در بخش «روش‌های پرداخت» فعال کنید.",
+      "starsNotEnabledGlobally": "پرداخت با ستاره در روش‌های پرداخت فعال نیست. «Web Stars» را در بخش «روش‌های پرداخت» فعال کنید.",
       "prizes": {
         "addPrize": "افزودن جایزه",
         "editPrize": "ویرایش جایزه",
@@ -1332,7 +1324,6 @@
         "source": "بر اساس منبع",
         "tariff": "بر اساس تعرفه"
       },
-      "enableTelegram": "Telegram",
       "enableEmail": "Email",
       "sendingBoth": "۲ پیام‌رسانی ایجاد خواهد شد",
       "bothCreated": "پیام‌رسانی‌ها ایجاد شدند",
@@ -1423,7 +1414,7 @@
     "payments": {
       "title": "پرداخت‌ها",
       "description": "جستجو و مدیریت پرداخت‌ها",
-      "searchPlaceholder": "جستجو: فاکتور، شناسه تلگرام، @نام‌کاربری، ایمیل...",
+      "searchPlaceholder": "جستجو: فاکتور، شناسه وب، @نام‌کاربری، ایمیل...",
       "searchHint": "مثال‌ها: SP-78291, @username, 123456789, user@mail.ru",
       "searchResults": "نتایج برای: {{query}} — {{count}} یافت شد",
       "resetSearch": "بازنشانی",
@@ -1507,7 +1498,7 @@
       "animatedBackground": "پس‌زمینه متحرک",
       "animatedBackgroundDesc": "نمایش جلوه‌های پس‌زمینه متحرک",
       "autoFullscreen": "تمام صفحه خودکار",
-      "autoFullscreenDesc": "باز شدن خودکار در تلگرام",
+      "autoFullscreenDesc": "باز شدن خودکار در وب",
       "availableThemes": "پوسته‌های موجود",
       "colors": {
         "background": "پس‌زمینه",
@@ -1535,8 +1526,8 @@
       "resetAllColors": "بازنشانی همه رنگ‌ها",
       "statusColors": "رنگ‌های وضعیت",
       "categories": {
-        "TELEGRAM_WIDGET": "Telegram Login Widget",
-        "TELEGRAM_OIDC": "Telegram Login (OIDC)"
+        "TELEGRAM_WIDGET": "Web Login Widget",
+        "TELEGRAM_OIDC": "Web Login (OIDC)"
       },
       "settingNames": {
         "Telegram Widget Size": "اندازه ویجت",
@@ -1601,7 +1592,7 @@
       "openIn": "باز کردن در",
       "openMode": {
         "external": "مرورگر خارجی",
-        "webapp": "مینی‌اپ تلگرام"
+        "webapp": "مینی‌اپ وب"
       },
       "invalidUrl": "لطفاً برای تمام دکمه‌های سفارشی یک URL معتبر وارد کنید (http:// یا https://)"
     },
@@ -1700,7 +1691,7 @@
       "adminNotificationsEnabled": "اعلان‌های مدیر",
       "adminNotificationsEnabledDesc": "ارسال اعلان به مدیران درباره تیکت‌ها و پاسخ‌های جدید",
       "cabinetNotifications": "اعلان‌های پنل",
-      "copyTelegramId": "برای کپی شناسه تلگرام کلیک کنید",
+      "copyTelegramId": "برای کپی شناسه وب کلیک کنید",
       "viewUser": "کاربر",
       "userNotificationsEnabled": "اعلان‌های کاربر",
       "userNotificationsEnabledDesc": "ارسال اعلان به کاربران درباره پاسخ‌های مدیر"
@@ -1915,7 +1906,7 @@
       "conditions": "شرایط نمایش",
       "userTypeFilter": "نوع کاربر",
       "userTypeAll": "همه",
-      "userTypeTelegram": "تلگرام",
+      "userTypeTelegram": "وب",
       "userTypeEmail": "ایمیل",
       "firstTopupFilter": "اولین شارژ",
       "firstTopupAny": "مهم نیست",
@@ -2083,7 +2074,7 @@
         "loadError": "بارگذاری جزئیات برداشت ناموفق بود",
         "userInfo": "اطلاعات کاربر",
         "username": "نام کاربری",
-        "telegramId": "شناسه تلگرام",
+        "telegramId": "شناسه وب",
         "balance": "موجودی",
         "totalReferrals": "مجموع معرفی‌ها",
         "totalEarnings": "مجموع درآمد",
@@ -2646,8 +2637,8 @@
         "sendTo": "ارسال به",
         "segment": "بخش",
         "user": "کاربر",
-        "userIdPlaceholder": "شناسه تلگرام یا شناسه کاربر",
-        "searchUserPlaceholder": "جستجو بر اساس نام، نام کاربری یا شناسه تلگرام...",
+        "userIdPlaceholder": "شناسه وب یا شناسه کاربر",
+        "searchUserPlaceholder": "جستجو بر اساس نام، نام کاربری یا شناسه وب...",
         "noUsersFound": "کاربری یافت نشد",
         "hasSubscription": "اشتراک",
         "preview": "پیش‌نمایش",
@@ -2941,7 +2932,7 @@
       "subtitle": "تخصیص و مدیریت نقش‌های کاربران",
       "assignSection": "تخصیص نقش",
       "userLabel": "کاربر",
-      "searchPlaceholder": "جستجو بر اساس نام، نام کاربری، شناسه تلگرام یا ایمیل...",
+      "searchPlaceholder": "جستجو بر اساس نام، نام کاربری، شناسه وب یا ایمیل...",
       "clearUser": "پاک کردن کاربر انتخاب‌شده",
       "noUsersFound": "کاربری یافت نشد",
       "roleLabel": "نقش",
@@ -3314,12 +3305,12 @@
   "profile": {
     "title": "پروفایل",
     "accountInfo": "اطلاعات حساب",
-    "telegramId": "شناسه تلگرام",
+    "telegramId": "شناسه وب",
     "username": "نام کاربری",
     "name": "نام",
     "registeredAt": "تاریخ ثبت نام",
     "emailAuth": "احراز هویت ایمیل",
-    "linkEmailDescription": "ایمیل خود را متصل کنید تا بدون تلگرام وارد شوید. پس از اتصال، ایمیل تایید دریافت خواهید کرد.",
+    "linkEmailDescription": "ایمیل خود را متصل کنید تا بدون وب وارد شوید. پس از اتصال، ایمیل تایید دریافت خواهید کرد.",
     "linkEmail": "اتصال ایمیل",
     "emailRequired": "ایمیل الزامی است",
     "invalidEmail": "لطفا یک آدرس ایمیل معتبر وارد کنید",
@@ -3390,17 +3381,14 @@
       "linkSuccess": "حساب با موفقیت متصل شد",
       "unlinkSuccess": "اتصال حساب با موفقیت قطع شد",
       "linkError": "اتصال حساب ناموفق بود",
-      "telegramLinkUnavailable": "اتصال تلگرام موقتاً در دسترس نیست. از ربات استفاده کنید:",
+      "telegramLinkUnavailable": "اتصال وب موقتاً در دسترس نیست. از ربات استفاده کنید:",
       "unlinkError": "قطع اتصال ناموفق بود",
       "goToAccounts": "حساب‌های متصل",
       "linking": "در حال اتصال حساب...",
-      "linkingTelegram": "در حال اتصال تلگرام...",
-      "returnToTelegram": "برای ادامه به تلگرام بازگردید",
-      "openTelegram": "باز کردن تلگرام",
       "continueInBrowser": "ادامه احراز هویت در مرورگر باز شده",
       "pollingTimeout": "بررسی احراز هویت منقضی شد. اگر اتصال را تکمیل کرده‌اید صفحه را بارگذاری مجدد کنید.",
       "providers": {
-        "telegram": "تلگرام",
+        "telegram": "وب",
         "email": "ایمیل",
         "google": "گوگل",
         "yandex": "یاندکس",
@@ -3560,14 +3548,6 @@
       "error": "لغو کد تخفیف ناموفق بود. لطفاً بعداً دوباره امتحان کنید."
     }
   },
-  "telegramRedirect": {
-    "maxRetries": "تعداد تلاش‌ها به حد مجاز رسیده. لطفاً بعداً دوباره امتحان کنید.",
-    "redirecting": "در حال انتقال...",
-    "loginAlternative": "ورود به روش دیگر",
-    "openInTelegram": "در تلگرام باز کنید",
-    "openInTelegramDesc": "برای ورود خودکار، این برنامه را از طریق ربات تلگرام باز کنید",
-    "redirectToLogin": "در حال انتقال به صفحه ورود..."
-  },
   "deepLink": {
     "connecting": "در حال اتصال به",
     "redirecting": "انتقال در",
@@ -3593,7 +3573,7 @@
     "configureHint": "BAN_SYSTEM_API_URL و BAN_SYSTEM_API_TOKEN را در پیکربندی تنظیم کنید",
     "loadError": "بارگذاری داده‌ها ناموفق بود",
     "notConfigured": "سیستم مسدودسازی پیکربندی نشده",
-    "contactTelegram": "نوشتن در تلگرام",
+    "contactTelegram": "نوشتن در وب",
     "tabs": {
       "dashboard": "آمار",
       "nodes": "گره‌ها",
@@ -3766,7 +3746,7 @@
     "contactLabel": "ایمیل یا @نام کاربری شما",
     "yourContact": "ایمیل یا @نام کاربری شما",
     "contactPlaceholder": "email@example.com یا @username",
-    "contactHint": "ایمیل یا @نام کاربری تلگرام را وارد کنید",
+    "contactHint": "ایمیل یا @نام کاربری وب را وارد کنید",
     "recipientLabel": "گیرنده هدیه",
     "recipientPlaceholder": "ایمیل یا @نام کاربری گیرنده",
     "giftMessageLabel": "پیام تبریک (اختیاری)",
@@ -3816,9 +3796,9 @@
     "giftSentSuccess": "هدیه ارسال شد!",
     "giftSentDesc": "گیرنده از طریق ایمیل مطلع خواهد شد",
     "giftPendingActivationDesc": "گیرنده در حال حاضر اشتراک فعال دارد. لینک فعال‌سازی هدیه برای او ارسال خواهد شد.",
-    "giftTelegramSent": "اطلاعیه هدیه از طریق تلگرام به گیرنده ارسال شد",
+    "giftTelegramSent": "اطلاعیه هدیه از طریق وب به گیرنده ارسال شد",
     "giftTelegramNotInBot": "گیرنده هنوز ربات را شروع نکرده است. این لینک را برای او ارسال کنید:",
-    "giftTelegramPendingSent": "درخواست فعال‌سازی از طریق تلگرام به گیرنده ارسال شد",
+    "giftTelegramPendingSent": "درخواست فعال‌سازی از طریق وب به گیرنده ارسال شد",
     "giftTelegramPendingNotInBot": "گیرنده هنوز در ربات نیست. لینک ربات را برایش ارسال کنید تا بتواند هدیه را فعال کند:",
     "openBot": "باز کردن ربات",
     "autoLoginFailed": "ورود خودکار ناموفق بود",
@@ -3846,8 +3826,8 @@
     "choosePeriod": "انتخاب مدت",
     "chooseTariff": "انتخاب طرح",
     "recipient": "گیرنده",
-    "recipientPlaceholder": "ایمیل یا @telegram",
-    "recipientHint": "ایمیل یا نام کاربری تلگرام را وارد کنید",
+    "recipientPlaceholder": "ایمیل یا @web",
+    "recipientHint": "ایمیل یا نام کاربری وب را وارد کنید",
     "giftMessage": "پیام تبریک",
     "giftMessagePlaceholder": "پیام شخصی اضافه کنید (اختیاری)",
     "paymentMode": "روش پرداخت",
@@ -3895,7 +3875,7 @@
       "activate": "فعال‌سازی"
     },
     "warning": {
-      "telegram_unresolvable": "نام کاربری تلگرام قابل تأیید نبود. ممکن است گیرنده اعلان هدیه را دریافت نکند."
+      "telegram_unresolvable": "نام کاربری وب قابل تأیید نبود. ممکن است گیرنده اعلان هدیه را دریافت نکند."
     }
   }
 }

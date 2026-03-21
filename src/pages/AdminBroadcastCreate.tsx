@@ -9,6 +9,7 @@ import {
   CombinedBroadcastCreateRequest,
 } from '../api/adminBroadcasts';
 import { AdminBackButton } from '../components/admin';
+import { TELEGRAM_BROADCASTS_ENABLED } from '@/config/webFeatures';
 
 // Icons
 const BroadcastIcon = () => (
@@ -118,8 +119,8 @@ export default function AdminBroadcastCreate() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Channel toggles (both can be enabled)
-  const [telegramEnabled, setTelegramEnabled] = useState(true);
-  const [emailEnabled, setEmailEnabled] = useState(false);
+  const [telegramEnabled, setTelegramEnabled] = useState(TELEGRAM_BROADCASTS_ENABLED);
+  const [emailEnabled, setEmailEnabled] = useState(true);
 
   // Separate targets per channel
   const [telegramTarget, setTelegramTarget] = useState('');
@@ -246,6 +247,7 @@ export default function AdminBroadcastCreate() {
 
   // Handle toggling channels
   const handleToggleTelegram = () => {
+    if (!TELEGRAM_BROADCASTS_ENABLED) return;
     setTelegramEnabled((prev) => !prev);
     setTelegramTarget('');
     telegramPreviewMutation.reset();
@@ -507,17 +509,6 @@ export default function AdminBroadcastCreate() {
         </label>
         <div className="flex gap-3">
           <button
-            onClick={handleToggleTelegram}
-            className={`flex flex-1 items-center justify-center gap-2 rounded-lg border p-4 transition-all ${
-              telegramEnabled
-                ? 'border-accent-500 bg-accent-500/10 text-accent-400'
-                : 'border-dark-700 bg-dark-800 text-dark-300 hover:border-dark-600'
-            }`}
-          >
-            <TelegramIcon />
-            <span className="font-medium">{t('admin.broadcasts.enableTelegram')}</span>
-          </button>
-          <button
             onClick={handleToggleEmail}
             className={`flex flex-1 items-center justify-center gap-2 rounded-lg border p-4 transition-all ${
               emailEnabled
@@ -538,11 +529,9 @@ export default function AdminBroadcastCreate() {
       </div>
 
       {/* Telegram section */}
-      {telegramEnabled && (
+      {TELEGRAM_BROADCASTS_ENABLED && telegramEnabled && (
         <div className="card space-y-6">
-          <h2 className="text-lg font-semibold text-dark-100">
-            {t('admin.broadcasts.telegramSection')}
-          </h2>
+          <h2 className="text-lg font-semibold text-dark-100">Broadcast section</h2>
 
           {/* Telegram filter selection */}
           {renderFilterDropdown(
@@ -733,12 +722,15 @@ export default function AdminBroadcastCreate() {
           {(telegramRecipientsCount !== null || emailRecipientsCount !== null) && (
             <span>
               {t('admin.broadcasts.willBeSent')}:{' '}
-              {telegramRecipientsCount !== null && (
+              {TELEGRAM_BROADCASTS_ENABLED && telegramRecipientsCount !== null && (
                 <>
                   <strong className="text-accent-400">{telegramRecipientsCount}</strong> (TG)
                 </>
               )}
-              {telegramRecipientsCount !== null && emailRecipientsCount !== null && ' + '}
+              {TELEGRAM_BROADCASTS_ENABLED &&
+                telegramRecipientsCount !== null &&
+                emailRecipientsCount !== null &&
+                ' + '}
               {emailRecipientsCount !== null && (
                 <>
                   <strong className="text-accent-400">{emailRecipientsCount}</strong> (Email)
