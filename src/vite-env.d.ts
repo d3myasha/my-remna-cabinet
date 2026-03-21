@@ -4,6 +4,9 @@ declare const __APP_VERSION__: string;
 
 interface ImportMetaEnv {
   readonly VITE_API_URL: string;
+  readonly VITE_AUTH_MODE?: 'api_key' | 'jwt';
+  readonly VITE_API_KEY_HEADER?: string;
+  readonly VITE_API_KEY_PREFIX?: string;
   readonly VITE_TELEGRAM_BOT_USERNAME?: string;
   readonly VITE_APP_NAME?: string;
   readonly VITE_APP_LOGO?: string;

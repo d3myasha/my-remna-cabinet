@@ -231,7 +231,9 @@ https://cabinet.example.com {
 | Переменная | Описание | По умолчанию |
 |---|---|---|
 | `VITE_API_URL` | Путь к API (`/api` или полный URL) | `/api` |
-| `VITE_TELEGRAM_BOT_USERNAME` | Username Telegram бота (без @) | — |
+| `VITE_AUTH_MODE` | Режим авторизации (`api_key` или `jwt`) | `api_key` |
+| `VITE_API_KEY_HEADER` | Заголовок для API ключа | `X-API-Key` |
+| `VITE_API_KEY_PREFIX` | Префикс значения ключа (например `Bearer`) | — |
 | `VITE_APP_NAME` | Название в шапке и вкладке браузера | `Cabinet` |
 | `VITE_APP_LOGO` | Текст логотипа (1-2 символа) | `V` |
 
