@@ -85,7 +85,7 @@ export function AppHeader({
   );
   const { toggleTheme, isDark } = useTheme();
   const { haptic, platform } = usePlatform();
-  const userPhotoUrl = user?.photo_url || null;
+  const userPhotoUrl = null;
   const [logoLoaded, setLogoLoaded] = useState(() => isLogoPreloaded());
 
   // Branding
