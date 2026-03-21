@@ -113,7 +113,12 @@ apiClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) =>
   }
 
   const method = config.method?.toUpperCase();
-  if (method && ['POST', 'PUT', 'DELETE', 'PATCH'].includes(method) && config.headers) {
+  if (
+    method &&
+    ['POST', 'PUT', 'DELETE', 'PATCH'].includes(method) &&
+    config.headers &&
+    !isAuthEndpoint(config.url)
+  ) {
     config.headers[CSRF_HEADER_NAME] = ensureCsrfToken();
   }
 
