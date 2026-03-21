@@ -9,6 +9,9 @@ import { useBlockingStore } from '../store/blocking';
 import { API } from '../config/constants';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+const PANEL_API_KEY = import.meta.env.VITE_PANEL_API_KEY || '';
+const PANEL_API_KEY_HEADER = import.meta.env.VITE_PANEL_API_KEY_HEADER || 'X-API-Key';
+const PANEL_API_KEY_PREFIX = import.meta.env.VITE_PANEL_API_KEY_PREFIX || '';
 
 tokenRefreshManager.setRefreshEndpoint(`${API_BASE_URL}/cabinet/auth/refresh`);
 
@@ -69,6 +72,12 @@ function isAuthEndpoint(url: string | undefined): boolean {
 }
 
 apiClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
+  if (PANEL_API_KEY && config.headers) {
+    config.headers[PANEL_API_KEY_HEADER] = PANEL_API_KEY_PREFIX
+      ? `${PANEL_API_KEY_PREFIX} ${PANEL_API_KEY}`
+      : PANEL_API_KEY;
+  }
+
   if (!isAuthEndpoint(config.url)) {
     let token = tokenStorage.getAccessToken();
 
