@@ -72,7 +72,7 @@ function isAuthEndpoint(url: string | undefined): boolean {
 }
 
 apiClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
-  if (PANEL_API_KEY && config.headers) {
+  if (PANEL_API_KEY && config.headers && !isAuthEndpoint(config.url)) {
     config.headers[PANEL_API_KEY_HEADER] = PANEL_API_KEY_PREFIX
       ? `${PANEL_API_KEY_PREFIX} ${PANEL_API_KEY}`
       : PANEL_API_KEY;
