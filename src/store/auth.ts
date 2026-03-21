@@ -7,7 +7,6 @@ import { captureCampaignFromUrl, consumeCampaignSlug } from '../utils/campaign';
 import { captureReferralFromUrl, consumeReferralCode } from '../utils/referral';
 import { tokenStorage, isTokenValid, tokenRefreshManager } from '../utils/token';
 import { usePermissionStore } from './permissions';
-import { IS_API_KEY_AUTH } from '@/config/auth';
 
 export interface TelegramWidgetData {
   id: number;
@@ -20,7 +19,6 @@ export interface TelegramWidgetData {
 }
 
 interface AuthState {
-  apiKey: string | null;
   accessToken: string | null;
   refreshToken: string | null;
   user: User | null;
@@ -41,7 +39,6 @@ interface AuthState {
   loginWithTelegramWidget: (data: TelegramWidgetData) => Promise<void>;
   loginWithTelegramOIDC: (idToken: string) => Promise<void>;
   loginWithEmail: (email: string, password: string) => Promise<void>;
-  loginWithApiKey: (apiKey: string) => Promise<void>;
   loginWithOAuth: (
     provider: string,
     code: string,
@@ -66,7 +63,6 @@ const initState = {
 export const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
-      apiKey: null,
       accessToken: null,
       refreshToken: null,
       user: null,
@@ -99,14 +95,12 @@ export const useAuthStore = create<AuthState>()(
 
       logout: () => {
         const refreshToken = tokenStorage.getRefreshToken();
-        if (!IS_API_KEY_AUTH && refreshToken) {
+        if (refreshToken) {
           authApi.logout(refreshToken).catch(() => {});
         }
         tokenStorage.clearTokens();
-        tokenStorage.clearApiKey();
         usePermissionStore.getState().reset();
         set({
-          apiKey: null,
           accessToken: null,
           refreshToken: null,
           user: null,
@@ -117,13 +111,11 @@ export const useAuthStore = create<AuthState>()(
 
       checkAdminStatus: async () => {
         try {
-          if (!IS_API_KEY_AUTH) {
-            const token = tokenStorage.getAccessToken();
-            if (!token || !isTokenValid(token)) {
-              set({ isAdmin: false });
-              usePermissionStore.getState().reset();
-              return;
-            }
+          const token = tokenStorage.getAccessToken();
+          if (!token || !isTokenValid(token)) {
+            set({ isAdmin: false });
+            usePermissionStore.getState().reset();
+            return;
           }
           const response = await apiClient.get<{ is_admin: boolean }>('/cabinet/auth/me/is-admin');
           set({ isAdmin: response.data.is_admin });
@@ -160,49 +152,6 @@ export const useAuthStore = create<AuthState>()(
             set({ isLoading: true });
 
             tokenStorage.migrateFromLocalStorage();
-
-            if (IS_API_KEY_AUTH) {
-              const apiKey = tokenStorage.getApiKey();
-              if (!apiKey) {
-                set({
-                  apiKey: null,
-                  accessToken: null,
-                  refreshToken: null,
-                  user: null,
-                  isAuthenticated: false,
-                  isLoading: false,
-                  isAdmin: false,
-                });
-                usePermissionStore.getState().reset();
-                return;
-              }
-
-              try {
-                const user = await authApi.getMe();
-                await get().checkAdminStatus();
-                set({
-                  apiKey,
-                  accessToken: null,
-                  refreshToken: null,
-                  user,
-                  isAuthenticated: true,
-                  isLoading: false,
-                });
-              } catch {
-                tokenStorage.clearApiKey();
-                usePermissionStore.getState().reset();
-                set({
-                  apiKey: null,
-                  accessToken: null,
-                  refreshToken: null,
-                  user: null,
-                  isAuthenticated: false,
-                  isLoading: false,
-                  isAdmin: false,
-                });
-              }
-              return;
-            }
 
             const accessToken = tokenStorage.getAccessToken();
             const refreshToken = tokenStorage.getRefreshToken();
@@ -349,38 +298,6 @@ export const useAuthStore = create<AuthState>()(
           pendingCampaignBonus: response.campaign_bonus || null,
         });
         await get().checkAdminStatus();
-      },
-
-      loginWithApiKey: async (apiKey) => {
-        const trimmedKey = apiKey.trim();
-        if (!trimmedKey) {
-          throw new Error('API key is required');
-        }
-
-        tokenStorage.setApiKey(trimmedKey);
-        try {
-          const user = await authApi.getMe();
-          set({
-            apiKey: trimmedKey,
-            accessToken: null,
-            refreshToken: null,
-            user,
-            isAuthenticated: true,
-            pendingCampaignBonus: null,
-          });
-          await get().checkAdminStatus();
-        } catch (error) {
-          tokenStorage.clearApiKey();
-          set({
-            apiKey: null,
-            accessToken: null,
-            refreshToken: null,
-            user: null,
-            isAuthenticated: false,
-            isAdmin: false,
-          });
-          throw error;
-        }
       },
 
       loginWithOAuth: async (provider, code, state, deviceId) => {

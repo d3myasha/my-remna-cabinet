@@ -3,7 +3,6 @@ import axios from 'axios';
 const TOKEN_KEYS = {
   ACCESS: 'access_token',
   REFRESH: 'refresh_token',
-  API_KEY: 'api_key',
   USER: 'user',
   TELEGRAM_INIT: 'telegram_init_data',
 } as const;
@@ -76,38 +75,14 @@ export const tokenStorage = {
     }
   },
 
-  getApiKey(): string | null {
-    try {
-      return localStorage.getItem(TOKEN_KEYS.API_KEY) || sessionStorage.getItem(TOKEN_KEYS.API_KEY);
-    } catch {
-      return null;
-    }
-  },
-
-  setApiKey(apiKey: string): void {
-    try {
-      localStorage.setItem(TOKEN_KEYS.API_KEY, apiKey);
-      sessionStorage.removeItem(TOKEN_KEYS.API_KEY);
-    } catch {}
-  },
-
-  clearApiKey(): void {
-    try {
-      localStorage.removeItem(TOKEN_KEYS.API_KEY);
-      sessionStorage.removeItem(TOKEN_KEYS.API_KEY);
-    } catch {}
-  },
-
   clearTokens(): void {
     try {
       sessionStorage.removeItem(TOKEN_KEYS.ACCESS);
       sessionStorage.removeItem(TOKEN_KEYS.REFRESH);
       sessionStorage.removeItem(TOKEN_KEYS.USER);
-      sessionStorage.removeItem(TOKEN_KEYS.API_KEY);
       localStorage.removeItem(TOKEN_KEYS.ACCESS);
       localStorage.removeItem(TOKEN_KEYS.REFRESH);
       localStorage.removeItem(TOKEN_KEYS.USER);
-      localStorage.removeItem(TOKEN_KEYS.API_KEY);
     } catch {}
   },
 

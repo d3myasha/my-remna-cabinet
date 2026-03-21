@@ -7,13 +7,10 @@ import {
 } from '../utils/token';
 import { useBlockingStore } from '../store/blocking';
 import { API } from '../config/constants';
-import { API_KEY_HEADER, formatApiKeyHeaderValue, IS_API_KEY_AUTH } from '../config/auth';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
-if (!IS_API_KEY_AUTH) {
-  tokenRefreshManager.setRefreshEndpoint(`${API_BASE_URL}/cabinet/auth/refresh`);
-}
+tokenRefreshManager.setRefreshEndpoint(`${API_BASE_URL}/cabinet/auth/refresh`);
 
 const CSRF_COOKIE_NAME = 'csrf_token';
 const CSRF_HEADER_NAME = 'X-CSRF-Token';
@@ -72,12 +69,7 @@ function isAuthEndpoint(url: string | undefined): boolean {
 }
 
 apiClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
-  if (IS_API_KEY_AUTH) {
-    const apiKey = tokenStorage.getApiKey();
-    if (apiKey && config.headers) {
-      config.headers[API_KEY_HEADER] = formatApiKeyHeaderValue(apiKey);
-    }
-  } else if (!isAuthEndpoint(config.url)) {
+  if (!isAuthEndpoint(config.url)) {
     let token = tokenStorage.getAccessToken();
 
     if (token && isTokenExpired(token)) {
@@ -102,9 +94,8 @@ apiClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) =>
   }
 
   const isTelegramAuthEndpoint =
-    !IS_API_KEY_AUTH &&
-    (config.url?.startsWith('/cabinet/auth/telegram') ||
-      config.url?.startsWith('/cabinet/auth/account/link/telegram'));
+    config.url?.startsWith('/cabinet/auth/telegram') ||
+    config.url?.startsWith('/cabinet/auth/account/link/telegram');
   if (isTelegramAuthEndpoint) {
     const telegramInitData = getTelegramInitData();
     if (telegramInitData && config.headers) {
@@ -202,17 +193,7 @@ apiClient.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    if (error.response?.status === 401) {
-      if (IS_API_KEY_AUTH) {
-        tokenStorage.clearApiKey();
-        safeRedirectToLogin();
-        return Promise.reject(error);
-      }
-
-      if (originalRequest._retry) {
-        return Promise.reject(error);
-      }
-
+    if (error.response?.status === 401 && !originalRequest._retry) {
       const requestUrl = originalRequest.url || '';
 
       if (isAuthEndpoint(requestUrl)) {
