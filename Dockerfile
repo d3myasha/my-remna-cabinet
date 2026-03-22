@@ -13,36 +13,26 @@ RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 COPY . .
 
 # Build arguments for environment variables
-ARG VITE_API_URL=/api
-ARG VITE_PANEL_API_KEY
-ARG VITE_PANEL_API_KEY_HEADER=X-API-Key
-ARG VITE_PANEL_API_KEY_PREFIX=
-ARG VITE_TELEGRAM_BOT_USERNAME
-ARG VITE_APP_NAME=Cabinet
-ARG VITE_APP_LOGO=V
+ARG VITE_APP_NAME=Cabinet Frontend
+ARG VITE_APP_LOGO=C
 
 # Set environment variables for build
-ENV VITE_API_URL=$VITE_API_URL
-ENV VITE_PANEL_API_KEY=$VITE_PANEL_API_KEY
-ENV VITE_PANEL_API_KEY_HEADER=$VITE_PANEL_API_KEY_HEADER
-ENV VITE_PANEL_API_KEY_PREFIX=$VITE_PANEL_API_KEY_PREFIX
-ENV VITE_TELEGRAM_BOT_USERNAME=$VITE_TELEGRAM_BOT_USERNAME
 ENV VITE_APP_NAME=$VITE_APP_NAME
 ENV VITE_APP_LOGO=$VITE_APP_LOGO
 
 # Build the application
 RUN npm run build
 
-# Stage 2: Serve with Nginx
-FROM nginx:alpine
+# Stage 2: Serve with Caddy
+FROM caddy:2-alpine
 
 # Copy built assets from builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/dist /usr/share/caddy
+COPY Caddyfile /etc/caddy/Caddyfile
 
 # Expose port
 EXPOSE 80
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1
+    CMD caddy version || exit 1

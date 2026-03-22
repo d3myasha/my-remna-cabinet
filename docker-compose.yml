@@ -13,7 +13,7 @@ services:
     ports:
       - '${CABINET_PORT:-3020}:80'
     healthcheck:
-      test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://localhost:80/']
+      test: ['CMD', 'caddy', 'version']
       interval: 30s
       timeout: 3s
       retries: 3
